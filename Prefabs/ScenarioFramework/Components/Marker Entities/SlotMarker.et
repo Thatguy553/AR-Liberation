@@ -1,0 +1,7 @@
+GenericEntity {
+ ID "5EA2BD993660A058"
+ components {
+  LIB_ScenarioFrameworkSlotMarker "{5EA2BD9901E5E82E}" {
+  }
+ }
+}

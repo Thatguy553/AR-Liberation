@@ -1,0 +1,38 @@
+FrameWidgetClass {
+ Name "rootFrame"
+ {
+  RichTextWidgetClass "{61A71AA8F3B4B313}" {
+   Name "RichText0"
+   Slot FrameWidgetSlot "{61A71AA8F3B4B2F7}" {
+    PositionX 0.166
+    OffsetLeft 0.166
+    PositionY 1023.42
+    OffsetTop 1023.42
+    SizeX 1919.87
+    OffsetRight -1920.04
+    SizeY 54.471
+    OffsetBottom -1077.89
+   }
+   Color 0 0 0 1
+   "Horizontal Alignment" Center
+   "Vertical Alignment" Center
+  }
+  ImageWidgetClass "{61A71AAB4DA5D095}" {
+   Name "Image0"
+   Slot FrameWidgetSlot "{61A71AAB4DA5D071}" {
+    Anchor 0 0 0 0
+    PositionX 0
+    OffsetLeft 0
+    PositionY 0
+    OffsetTop 0
+    SizeX 1920.5
+    OffsetRight -1920.5
+    SizeY 1023.08
+    OffsetBottom -1023.08
+   }
+   Texture "{B003950B54B7AA46}UI/Textures/Icons/lib_markers.imageset"
+   Image "military"
+   Size 64 64
+  }
+ }
+}

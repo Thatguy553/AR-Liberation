@@ -1,0 +1,48 @@
+ImageSetClass {
+ RefSize 136 204
+ Textures {
+  ImageSetTextureClass {
+   screenSize FHD
+   size 136 204
+   path "{02802DB759D67C88}UI/Textures/Icons/lib_markers-100_atlas.edds"
+  }
+ }
+ Images {
+  ImageSetDefClass hq {
+   Name "hq"
+   Pos 2 2
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass fuelstation {
+   Name "fuelstation"
+   Pos 68 2
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass town {
+   Name "town"
+   Pos 2 68
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass capital {
+   Name "capital"
+   Pos 68 68
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass military {
+   Name "military"
+   Pos 2 134
+   Size 64 64
+   Flags 0
+  }
+  ImageSetDefClass transmitter {
+   Name "transmitter"
+   Pos 68 134
+   Size 64 64
+   Flags 0
+  }
+ }
+}

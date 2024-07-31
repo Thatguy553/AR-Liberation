@@ -1,0 +1,8 @@
+GameProject {
+ ID "Liberation"
+ GUID "6196420A2DFCE9E4"
+ TITLE "Liberation"
+ Dependencies {
+  "58D0FB3206B6F859"
+ }
+}

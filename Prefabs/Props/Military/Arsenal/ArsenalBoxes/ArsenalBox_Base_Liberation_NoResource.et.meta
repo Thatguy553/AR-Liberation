@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{5803AE25CF9392DE}Prefabs/Props/Military/Arsenal/ArsenalBoxes/ArsenalBox_Base_Liberation_NoResource.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass PS5 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

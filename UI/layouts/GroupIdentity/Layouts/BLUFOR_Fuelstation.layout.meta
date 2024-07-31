@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{BAD8DB519C6A827E}UI/layouts/GroupIdentity/Layouts/BLUFOR_Fuelstation.layout"
+ Configurations {
+  LayoutResourceClass PC {
+  }
+  LayoutResourceClass XBOX_ONE : PC {
+  }
+  LayoutResourceClass XBOX_SERIES : PC {
+  }
+  LayoutResourceClass PS4 : PC {
+  }
+  LayoutResourceClass PS5 : PC {
+  }
+  LayoutResourceClass HEADLESS : PC {
+  }
+ }
+}

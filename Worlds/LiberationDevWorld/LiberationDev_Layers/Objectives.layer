@@ -1,0 +1,115 @@
+$grp GenericEntity : "{C72F956E4AC6A6E7}Prefabs/ScenarioFramework/Components/Area.et" {
+ StPierre {
+  components {
+   LIB_ObjectiveComponent "{61A4F5E503C17EE0}" {
+   }
+   SCR_ScenarioFrameworkArea "{59E8CDC50969206E}" {
+    m_fAreaRadius 1000
+   }
+  }
+  coords 9737.46 7.385 1563.412
+  {
+   GenericEntity Layer1 : "{5F9FFF4BF027B3A3}Prefabs/ScenarioFramework/Components/Layer.et" {
+    coords 0 0 0
+    {
+     GenericEntity SlotMarker1 : "{E537867C6E760514}Prefabs/ScenarioFramework/Components/Marker Entities/SlotMarker.et" {
+      components {
+       LIB_ScenarioFrameworkSlotMarker "{5EA2BD9901E5E82E}" {
+        m_MapMarkerType LIB_ScenarioFrameworkMarkerCustom "{61A90BE3C99E64B2}" {
+         m_eMapMarkerIcon MILITARY
+         m_eMapMarkerColor BLUFOR
+         m_iMapMarkerRotation 90
+        }
+       }
+      }
+      coords 0 0 0
+     }
+    }
+   }
+  }
+ }
+ Area_Town {
+  components {
+   LIB_ObjectiveComponent "{61B5087A19AD693F}" {
+    m_ObjType TOWN
+    m_ObjName "St Pierre"
+   }
+   SCR_ScenarioFrameworkArea "{59E8CDC50969206E}" {
+    m_fAreaRadius 5
+   }
+  }
+  coords 9693.325 13.23 1550.688
+  {
+   SCR_BaseFactionTriggerEntity Area_Town_Trigger {
+    userScript "	// code here"\
+    "	protected string m_ObjectiveName;"\
+    "	protected IEntity m_ObjectiveEntity;"\
+    "	protected bool m_isActive;"\
+    "	protected LIB_TownManagerComponent m_ObjManager;"\
+    "	protected LIB_ObjectiveComponent m_ObjComponent;"\
+    "	// protected array<IEntity> m_ObjInfantry;"
+    constructor ""\
+    "		//SetEventMask(EntityEvent.SIMULATE);"\
+    "		m_ObjectiveName = parent.GetName();"\
+    "		Print(m_ObjectiveName);"\
+    "		m_ObjectiveEntity = parent;"\
+    "		m_isActive = false;"\
+    "		m_ObjManager = LIB_TownManagerComponent.GetInstance();"\
+    "		m_ObjComponent = LIB_ObjectiveComponent.Cast(parent.FindComponent(LIB_ObjectiveComponent));"\
+    "	"
+    TriggerShapeType Sphere
+    SphereRadius 850
+    DrawShape 1
+    ShapeColor 1 0 0 0.275
+    TriggerActivationType "All changes"
+    PeriodicQueries 1
+    UpdatePeriod 5
+    OnActivate ""\
+    "		/* code here */"\
+    "		m_ObjManager.AddObjActive(m_ObjectiveEntity);"\
+    "		"\
+    "		// +1 the objective count of the side that comes in."\
+    "		SCR_ChimeraCharacter agent = SCR_ChimeraCharacter.Cast(ent);"\
+    "		FactionKey fKey = agent.GetFactionKey();"\
+    "		EventHandlerManagerComponent eventHandler = EventHandlerManagerComponent.Cast(ent.FindComponent(EventHandlerManagerComponent));"\
+    "        SCR_AIGroup group = SCR_AIGroup.Cast(ent.FindComponent(SCR_AIGroup));"\
+    "		"\
+    "		"\
+    "		switch (fKey)"\
+    "		{"\
+    "			case \"US\":"\
+    "				m_ObjComponent.AddBluforTotal(1);"\
+    "			"\
+    "				break;"\
+    "			case \"USSR\":"\
+    "				m_ObjComponent.AddOpforTotal(1);"\
+    "				m_ObjComponent.AddObjUnits(ent);"\
+    "				break;	"\
+    "		}"\
+    "		"\
+    "		array<IEntity> triggerEntities = {};"\
+    "		"\
+    "		// If active dont spawn anymore infantry"\
+    "		if (m_isActive)"\
+    "		{"\
+    "			return;"\
+    "		}"\
+    "		"\
+    "		super.OnActivate(ent);"\
+    "		"\
+    "		m_ObjComponent.ActivateObj(m_ObjectiveEntity);"\
+    "		m_isActive = true;"\
+    "		Print(\"Activated\");"\
+    "	"
+    OnDeactivate ""\
+    "		/* code here */"\
+    "		Print(\"Deactivate\");"\
+    "		m_ObjComponent.DeactivateObj();"\
+    "		"\
+    "		m_isActive = false;"\
+    "	"
+    m_sOwnerFactionKey "US"
+   }
+  }
+ }
+}

@@ -39,13 +39,14 @@ class LIB_ObjectiveComponent : ScriptComponent
 	[Attribute("Obj Capture Time", defvalue: "30", desc: "The amount of time this objective must be held in order to be captured in seconds.")]
 	protected int m_ObjCapTime;
 	protected int m_ObjCapCurTime = 0;
-	protected int m_ObjCapStartTime;
+	protected int m_ObjCapStartTime = 0;
 	
 	protected ref array<ref EntityID> m_Houses = {};
 	protected ref array<IEntity> m_Units = {};
 	protected ref array<IEntity> m_PopulatedBuildings = {};
 	protected LIB_AiManagerClass m_AiManager;
 	protected LIB_TownManagerComponent m_ObjManager;
+	protected IEntity m_MarkerEnt;
 	
 	// Total units in the zone on each side.
 	protected int m_OpforTotal = 0;
@@ -185,9 +186,21 @@ class LIB_ObjectiveComponent : ScriptComponent
 	{
 		if (IsCapturing())
 		{
+			m_ObjCapCurTime = System.GetTickCount();
+			Print(m_ObjCapCurTime);
+			if (m_ObjCapStartTime == 0)
+			{
+				m_ObjCapStartTime = System.GetTickCount();
+			}
+			Print(m_ObjCapStartTime);
 			
-			//m_ObjCapStartTime = GetGame().Get
-			
+			Print(m_ObjCapCurTime - m_ObjCapStartTime);
+			// Only runs if it has been x seconds since capturing started
+			if ((m_ObjCapCurTime - m_ObjCapStartTime) >= m_ObjCapTime)
+			{
+				Print("Captured");
+				Capture();
+			}
 		}
 	}
 
@@ -196,10 +209,16 @@ class LIB_ObjectiveComponent : ScriptComponent
 	{
 		m_ObjManager = LIB_TownManagerComponent.GetInstance();
 	
-		IEntity MarkerEnt = m_ObjManager.CreateObjMarker(owner, this);
-		m_ObjManager.AddObjMarker(MarkerEnt);
+		// Makes the objective manager create and store the marker for this objective. Manager does nothing with this marker as of 0.1.0
+		m_MarkerEnt = m_ObjManager.CreateObjMarker(owner, this);
+		m_ObjManager.AddObjMarker(m_MarkerEnt);
+		
 		m_AiManager = LIB_AiManagerClass.GetInstance();
 		
+		// Convert m_ObjCapTime from seconds to ms
+		m_ObjCapTime = m_ObjCapTime * 1000;
+		
+		// To be moved to a custom config eventually
 		m_OInfGroups.Insert(m_OFireTeam);
 		m_OInfGroups.Insert(m_OLightFireTeam);
 		m_OInfGroups.Insert(m_OMgTeam);
@@ -220,8 +239,8 @@ class LIB_ObjectiveComponent : ScriptComponent
 		SetEventMask(owner, EntityEvent.FRAME | EntityEvent.INIT);
 	}
 	
-	// Town Building related functions
 	//------------------------------------------------------------------------------------------------
+	// Town Building related functions
 	IEntity GetRandomHouse(IEntity owner)
 	{
 		m_Houses = new array<ref EntityID>;
@@ -259,8 +278,8 @@ class LIB_ObjectiveComponent : ScriptComponent
 		return false;
 	}
 	
-	// Objective Activation Methods
 	//------------------------------------------------------------------------------------------------
+	// Objective Activation Methods
 	void ActivateObj(IEntity obj)
 	{
 		switch(m_ObjType)
@@ -374,10 +393,29 @@ class LIB_ObjectiveComponent : ScriptComponent
 	//------------------------------------------------------------------------------------------------
 	bool IsCapturing()
 	{
+		Print("Checking if capturing.");
+		Print(m_BluforTotal);
+		Print(m_OpforTotal);
 		if (m_BluforTotal >= m_OpforTotal)
 		{
+			Print("Capturing.");
 			return true;
 		}
+		Print("Not Capturing.");
 		return false;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	// When activated, assumes all conditions are met.
+	// Should probably change naming from "Blufor/Opfor" to something more generic, i.e. friendly/enemy
+	void Capture()
+	{
+		// Switch map marker color
+		LIB_ScenarioFrameworkSlotMarker markerComp = LIB_ScenarioFrameworkSlotMarker.Cast(m_MarkerEnt.FindComponent(LIB_ScenarioFrameworkSlotMarker));
+		markerComp.SetMapMarkerColor(LIB_EScenarioFrameworkMarkerCustomColor.BLUFOR);
+		
+		// Create a marker to point out any remaining units from this objective
+		
+		// Announce objective capture
 	}
 }

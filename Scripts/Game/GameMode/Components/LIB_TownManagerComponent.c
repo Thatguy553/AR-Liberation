@@ -130,7 +130,7 @@ class LIB_TownManagerComponent : ScriptComponent
 		}
 				
 		
-		markerComp.SetMapMarkerColor(LIB_EScenarioFrameworkMarkerCustomColor.BLUFOR);
+		markerComp.SetMapMarkerColor(LIB_EScenarioFrameworkMarkerCustomColor.OPFOR);
 		markerComp.SetMapMarkerText(owner.GetName());
 		markerComp.CreateMapMarker();
 		

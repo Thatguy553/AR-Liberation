@@ -1,0 +1,36 @@
+FrameWidgetClass {
+ Name "rootFrame"
+ {
+  TextWidgetClass "{61FE3E813E103741}" {
+   Name "Text0"
+   Slot FrameWidgetSlot "{61FE3E813E103724}" {
+    PositionX 1736
+    OffsetLeft 1736
+    PositionY 822.181
+    OffsetTop 822.2
+    SizeX 182
+    OffsetRight -1918
+    SizeY 30
+    OffsetBottom -852.2
+   }
+   Color 0.561 0.439 0.071 1
+   Text "Active Objectives"
+   "Horizontal Alignment" Center
+   "Vertical Alignment" Center
+  }
+  TextListboxWidgetClass "{61FE3E81316BD0DF}" {
+   Name "TextListbox0"
+   Slot FrameWidgetSlot "{61FE3E81316BD0B9}" {
+    PositionX 1736
+    OffsetLeft 1736
+    PositionY 859.644
+    OffsetTop 859.6
+    SizeX 182
+    OffsetRight -1918
+    SizeY 218.716
+    OffsetBottom -1078.4
+   }
+   "no focus" 1
+  }
+ }
+}

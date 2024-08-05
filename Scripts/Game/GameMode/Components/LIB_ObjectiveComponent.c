@@ -25,7 +25,7 @@ class LIB_ObjectiveComponent : ScriptComponent
 	protected float m_ObjSpwnRadius;
 
 	[Attribute("Objective Faction", defvalue: "USSR", desc: "The faction key for this objective to start with.")]
-	protected string m_ObjFaction;
+	protected FactionKey m_ObjFaction;
 
 	[Attribute("Objective Name", defvalue: "Obj Name", desc: "The name for this objective to use.")]
 	protected string m_ObjName;
@@ -184,7 +184,8 @@ class LIB_ObjectiveComponent : ScriptComponent
 	//------------------------------------------------------------------------------------------------
 	protected override void EOnFrame(IEntity owner, float timeSlice)
 	{
-		if (IsCapturing())
+		bool capturing = IsCapturing();
+		if (m_ObjFaction == "USSR" && capturing && m_BluforTotal > 0)
 		{
 			m_ObjCapCurTime = System.GetTickCount();
 			Print(m_ObjCapCurTime);
@@ -321,6 +322,7 @@ class LIB_ObjectiveComponent : ScriptComponent
 			SCR_AIGroup group;
 			ResourceName groupToSpawn = m_OInfGroups.GetRandomElement();
 			
+			
 			m_Units.Insert(m_AiManager.AiSpawner(groupToSpawn, spawnPosition, waypointType, spawnPosition, group, this));
 			
 			AiCount += group.GetNumberOfMembersToSpawn();
@@ -396,7 +398,7 @@ class LIB_ObjectiveComponent : ScriptComponent
 		Print("Checking if capturing.");
 		Print(m_BluforTotal);
 		Print(m_OpforTotal);
-		if (m_BluforTotal >= m_OpforTotal)
+		if (m_BluforTotal > m_OpforTotal)
 		{
 			Print("Capturing.");
 			return true;

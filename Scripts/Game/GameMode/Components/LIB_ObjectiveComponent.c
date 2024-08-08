@@ -47,6 +47,7 @@ class LIB_ObjectiveComponent : ScriptComponent
 	protected LIB_AiManagerClass m_AiManager;
 	protected LIB_TownManagerComponent m_ObjManager;
 	protected IEntity m_MarkerEnt;
+	protected IEntity m_ObjectiveEnt;
 	
 	// Total units in the zone on each side.
 	protected int m_OpforTotal = 0;
@@ -188,18 +189,18 @@ class LIB_ObjectiveComponent : ScriptComponent
 		if (m_ObjFaction == "USSR" && capturing && m_BluforTotal > 0)
 		{
 			m_ObjCapCurTime = System.GetTickCount();
-			Print(m_ObjCapCurTime);
+			//Print(m_ObjCapCurTime);
 			if (m_ObjCapStartTime == 0)
 			{
 				m_ObjCapStartTime = System.GetTickCount();
 			}
-			Print(m_ObjCapStartTime);
+			//Print(m_ObjCapStartTime);
 			
-			Print(m_ObjCapCurTime - m_ObjCapStartTime);
+			//Print(m_ObjCapCurTime - m_ObjCapStartTime);
 			// Only runs if it has been x seconds since capturing started
 			if ((m_ObjCapCurTime - m_ObjCapStartTime) >= m_ObjCapTime)
 			{
-				Print("Captured");
+				//Print("Captured");
 				Capture();
 			}
 		}
@@ -218,6 +219,9 @@ class LIB_ObjectiveComponent : ScriptComponent
 		
 		// Convert m_ObjCapTime from seconds to ms
 		m_ObjCapTime = m_ObjCapTime * 1000;
+		
+		// This is the object entity all components are attached too.
+		m_ObjectiveEnt = owner;
 		
 		// To be moved to a custom config eventually
 		m_OInfGroups.Insert(m_OFireTeam);
@@ -395,15 +399,15 @@ class LIB_ObjectiveComponent : ScriptComponent
 	//------------------------------------------------------------------------------------------------
 	bool IsCapturing()
 	{
-		Print("Checking if capturing.");
-		Print(m_BluforTotal);
-		Print(m_OpforTotal);
+		//Print("Checking if capturing.");
+		//Print(m_BluforTotal);
+		//Print(m_OpforTotal);
 		if (m_BluforTotal > m_OpforTotal)
 		{
-			Print("Capturing.");
+			//Print("Capturing.");
 			return true;
 		}
-		Print("Not Capturing.");
+		//Print("Not Capturing.");
 		return false;
 	}
 	
@@ -414,10 +418,16 @@ class LIB_ObjectiveComponent : ScriptComponent
 	{
 		// Switch map marker color
 		LIB_ScenarioFrameworkSlotMarker markerComp = LIB_ScenarioFrameworkSlotMarker.Cast(m_MarkerEnt.FindComponent(LIB_ScenarioFrameworkSlotMarker));
+		Print("Setting color to blue");
 		markerComp.SetMapMarkerColor(LIB_EScenarioFrameworkMarkerCustomColor.BLUFOR);
 		
 		// Create a marker to point out any remaining units from this objective
+		foreach(IEntity unit : m_Units)
+		{
+			// Attach marker, probably check out mod Unit Map Markers V2
+		}
 		
 		// Announce objective capture
+		m_ObjManager.AddFriendlyObjArray(m_ObjectiveEnt);
 	}
 }

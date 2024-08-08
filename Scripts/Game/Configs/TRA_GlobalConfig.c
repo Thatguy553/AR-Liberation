@@ -27,7 +27,7 @@ class TRA_GlobalConfig
 	ResourceName m_OSuppTeam;
 
 	[Attribute(defvalue: "", desc: "Opfor Infantry Groups Array", category: "Group Prefabs Array")]
-	array<ResourceName> m_OInfGroups;
+	ref array<ResourceName> m_OInfGroups;
 	
 	[Attribute(defvalue: "", desc: "Opfor BTR", category: "Vehicle Prefabs", params: "et")]
 	ResourceName m_OBtr;
@@ -36,5 +36,11 @@ class TRA_GlobalConfig
 	ResourceName m_OUaz;
 	
 	[Attribute(defvalue: "", desc: "Opfor Vehicle Prefabs Array", category: "Vehicle Prefabs Array")]
-	array<ResourceName> m_OVehGroups;
+	ref array<ResourceName> m_OVehGroups;
+	
+	//------------------------------------------------------------------------------------------------
+	array<ResourceName> GetOInfGroups()
+	{
+		return m_OInfGroups;
+	}
 }

@@ -6,7 +6,8 @@ class LIB_TownManagerComponent : ScriptComponent
 {
 	protected static LIB_TownManagerComponent m_sInstance;
 	
-	protected ref array<IEntity> m_ObjArr = {};
+	protected ref array<IEntity> m_HostileObjArr = {};
+	protected ref array<IEntity> m_FriendlyObjArr = {};
 	protected ref array<IEntity> m_ObjMarkerArr = {};
 	protected ref array<IEntity> m_ObjActiveArr = {};
 	
@@ -34,11 +35,38 @@ class LIB_TownManagerComponent : ScriptComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	array<IEntity> GetObjArray()
+	void AddHostileObjArray(IEntity obj)
 	{
-		return m_ObjArr;
+		m_HostileObjArr.Insert(obj);
 	}
 	
+	//------------------------------------------------------------------------------------------------
+	array<IEntity> GetHostileObjArray()
+	{
+		return m_HostileObjArr;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	IEntity GetRandHostileObj()
+	{
+		if (m_HostileObjArr.IsEmpty()) {
+			return null;
+		};
+		
+		return m_HostileObjArr.GetRandomElement();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void AddFriendlyObjArray(IEntity obj)
+	{
+		m_FriendlyObjArr.Insert(obj);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	array<IEntity> GetFriendlyObjArray()
+	{
+		return m_FriendlyObjArr;
+	}
 	//------------------------------------------------------------------------------------------------
 	array<IEntity> GetObjActiveArray()
 	{
@@ -49,6 +77,16 @@ class LIB_TownManagerComponent : ScriptComponent
 	void AddObjActive(IEntity ent)
 	{
 		m_ObjActiveArr.Insert(ent);
+		
+		// Call UI element onto all players screens if not already, and add objective name, cancel remove from screen delay if active (Probably should make another function)
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void RemObjActive(IEntity ent)
+	{
+		m_ObjActiveArr.RemoveItem(ent);
+		
+		// Remove objective name from ui element, and if element is empty remove from player screen after a delay.
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -68,29 +106,9 @@ class LIB_TownManagerComponent : ScriptComponent
 	override void OnDelete(IEntity owner)
 	{
 		// remove if unused
-		if (m_ObjArr) {
-			m_ObjArr.RemoveItem(owner)
-		}
 	}
+	
 	//------------------------------------------------------------------------------------------------
-	IEntity GetRandObj()
-	{
-		if (m_ObjArr.IsEmpty()) {
-			return null;
-		};
-		
-		return m_ObjArr.GetRandomElement();
-	}
-	
-	array<IEntity> GetObjArr()
-	{
-		if (m_ObjArr.IsEmpty()) {
-			return null;
-		};
-		
-		return m_ObjArr;
-	}
-	
 	IEntity CreateObjMarker(IEntity owner, LIB_ObjectiveComponent comp = null)
 	{
 		Print("Create Obj Marker");

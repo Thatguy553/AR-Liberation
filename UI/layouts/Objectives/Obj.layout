@@ -1,0 +1,34 @@
+FrameWidgetClass {
+ Name "rootFrame"
+ Slot FrameWidgetSlot "{62135D3F92146188}" {
+  SizeToContent 1
+ }
+ {
+  TextWidgetClass "{621101F1E6CF9EC9}" {
+   Name "Text0"
+   Slot FrameWidgetSlot "{621101F1E6CF9EAA}" {
+    PositionX -2.145
+    OffsetLeft -2.1
+    PositionY 2.582
+    OffsetTop 2.6
+    OffsetRight -97.9
+    SizeY 30
+    OffsetBottom -32.6
+    SizeToContent 1
+   }
+  }
+  ImageWidgetClass "{621101F1BAF3D971}" {
+   Name "Image0"
+   Slot FrameWidgetSlot "{621101F1BAF3D940}" {
+    PositionX 25.303
+    OffsetLeft 25.303
+    PositionY -66.241
+    OffsetTop -66.241
+    SizeX 50
+    OffsetRight -75.303
+    SizeY 50
+    OffsetBottom 16.241
+   }
+  }
+ }
+}

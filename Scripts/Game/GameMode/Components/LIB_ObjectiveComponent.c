@@ -48,10 +48,10 @@ class LIB_ObjectiveComponent : ScriptComponent
 	protected LIB_TownManagerComponent m_ObjManager;
 	
 	// Should be [ImgWidget, TextWidget]
-	protected array<Widget> m_MarkerWidgets;
+	protected ref array<Widget> m_MarkerWidgets = {};
 	
 	protected IEntity m_ObjectiveEnt;
-	protected TRA_GlobalConfig m_sConfig;
+	protected ref TRA_GlobalConfig m_Config;
 	
 	// Total units in the zone on each side.
 	protected int m_OpforTotal = 0;
@@ -82,6 +82,10 @@ class LIB_ObjectiveComponent : ScriptComponent
 	*/
 	array<Widget> GetMarkerWidgets()
 	{
+		if (m_MarkerWidgets.Count() <= 0)
+		{
+			return null;
+		}
 		return m_MarkerWidgets;
 	}
 
@@ -258,7 +262,7 @@ class LIB_ObjectiveComponent : ScriptComponent
 			// Only runs if it has been x seconds since capturing started
 			if ((m_ObjCapCurTime - m_ObjCapStartTime) >= m_ObjCapTime)
 			{
-				//Print("Captured");
+				Print("Captured");
 				Capture();
 			}
 		}
@@ -281,7 +285,7 @@ class LIB_ObjectiveComponent : ScriptComponent
 		m_ObjectiveEnt = owner;
 		
 		// Custom Config of units
-		m_sConfig = TRA_GlobalConfig.GetConfig();
+		m_Config = TRA_GlobalConfig.GetConfig();
 		
 		// Assign this objective to whichever array it belongs in the obj manager
 		switch(m_ObjFaction)
@@ -394,7 +398,7 @@ class LIB_ObjectiveComponent : ScriptComponent
 			
 			string waypointType = "{93291E72AC23930F}Prefabs/AI/Waypoints/AIWaypoint_Defend.et";
 			SCR_AIGroup group;
-			ResourceName groupToSpawn = m_sConfig.m_OInfGroups.GetRandomElement();
+			ResourceName groupToSpawn = m_Config.m_OInfGroups.GetRandomElement();
 			
 			
 			m_Units.Insert(m_AiManager.AiSpawner(groupToSpawn, spawnPosition, waypointType, spawnPosition, group, this));
@@ -408,7 +412,7 @@ class LIB_ObjectiveComponent : ScriptComponent
 			IEntity spawnBuilding = GetRandomHouse();
 			vector spawnPosition = spawnBuilding.GetOrigin();
 			
-			m_AiManager.SpawnMannedVeh(m_sConfig.m_OVehGroups.GetRandomElement(), m_sConfig.m_OLightFireTeam, spawnPosition);
+			m_AiManager.SpawnMannedVeh(m_Config.m_OVehGroups.GetRandomElement(), m_Config.m_OLightFireTeam, spawnPosition);
 			
 			// hard coded for now, m_OLightFireTeam has 4 units.
 			m_BluforTotal += 4;
@@ -439,7 +443,7 @@ class LIB_ObjectiveComponent : ScriptComponent
 	{
 		foreach (IEntity unit : m_Units)
 		{
-			Print(unit);
+			//Print(unit);
 			SCR_EntityHelper.DeleteEntityAndChildren(unit);	
 		}
 	}
@@ -486,12 +490,9 @@ class LIB_ObjectiveComponent : ScriptComponent
 	// Should probably change naming from "Blufor/Opfor" to something more generic, i.e. friendly/enemy
 	void Capture()
 	{
-		// Switch map marker color
-		//LIB_ScenarioFrameworkSlotMarker markerComp = LIB_ScenarioFrameworkSlotMarker.Cast(m_MarkerEnt.FindComponent(LIB_ScenarioFrameworkSlotMarker));
-		//Print("Setting color to blue");
-		//markerComp.SetMapMarkerColor(LIB_EScenarioFrameworkMarkerCustomColor.BLUFOR);
-		ImageWidget imgWidget = ImageWidget.Cast(m_MarkerWidgets[0]);
-		imgWidget.SetColor(Color.Blue);
+		// Switch map marker color - Not Necessary
+		//ImageWidget imgWidget = ImageWidget.Cast(m_MarkerWidgets[0]);
+		//imgWidget.SetColor(Color.Blue);
 		
 		// Create a marker to point out any remaining units from this objective
 		foreach(IEntity unit : m_Units)
@@ -503,5 +504,8 @@ class LIB_ObjectiveComponent : ScriptComponent
 		m_ObjManager.RemHostileObj(m_ObjectiveEnt);
 		m_ObjManager.AddFriendlyObjArray(m_ObjectiveEnt);
 		m_ObjManager.TellObjCaptured(m_ObjectiveEnt);
+		
+		// Changing objective faction is enough for the map marker to auto change.
+		m_ObjFaction = "US";
 	}
 }

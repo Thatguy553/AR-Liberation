@@ -27,7 +27,7 @@ class TRA_GlobalConfig
 	ResourceName m_OSuppTeam;
 
 	[Attribute(defvalue: "", desc: "Opfor Infantry Groups Array", category: "Group Prefabs Array")]
-	array<ResourceName> m_OInfGroups;
+	ref array<ResourceName> m_OInfGroups;
 	
 	[Attribute(defvalue: "", desc: "Opfor BTR", category: "Vehicle Prefabs", params: "et")]
 	ResourceName m_OBtr;
@@ -36,30 +36,27 @@ class TRA_GlobalConfig
 	ResourceName m_OUaz;
 	
 	[Attribute(defvalue: "", desc: "Opfor Vehicle Prefabs Array", category: "Vehicle Prefabs Array")]
-	array<ResourceName> m_OVehGroups;
+	ref array<ResourceName> m_OVehGroups;
 	
 	//------------------------------------------------------------------------------------------------
-	static TRA_GlobalConfig  m_Config;
+	static ref TRA_GlobalConfig m_Config;
 	
 	static TRA_GlobalConfig GetConfig(ResourceName ConfigRes = "{80A853CA085D4CD2}Configs/Global/TRA_GlobalConfig.conf")
 	{
-		Print("m_sConfigRes");
-		Print(ConfigRes);
 		if (m_Config != null)
 			return m_Config;
 		
-		Print("m_sConfig");
-		Print(m_Config);
 		Resource resource = Resource.Load(ConfigRes);
 		
-		Print("m_sresource");
-		Print(resource);
-		
-		Print(resource.IsValid());
 		if (!resource.IsValid())
 			return null;
-		TRA_GlobalConfig test = TRA_GlobalConfig.Cast(BaseContainerTools.CreateInstanceFromContainer(resource.GetResource().ToBaseContainer()));
-		Print(test);
+		
+		BaseContainer bCont = resource.GetResource().ToBaseContainer();
+		
+		Managed mngd = BaseContainerTools.CreateInstanceFromContainer(bCont);
+		
+		TRA_GlobalConfig test = TRA_GlobalConfig.Cast(mngd);
+		
 		m_Config = test;
 		return test;
 	}

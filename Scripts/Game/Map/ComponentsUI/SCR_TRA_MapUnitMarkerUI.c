@@ -133,16 +133,23 @@ modded class SCR_TR_MapUnitMarkerUI
 				
 				ObjText.GetScreenSize(widthT, heightT);
 				
-				Print(string.Format("%1, %2", widthT, heightT));
 				FrameSlot.SetPos(
-					ObjText, 
-					//screenPosX,
-					//screenPosY + 10
-					FrameSlot.GetPos(ObjImage)[0] - (widthT/2),
+					ObjText,
+					FrameSlot.GetPos(ObjImage)[0] - (widthT/2), // Attempts to center the text to the marker image
 					FrameSlot.GetPos(ObjImage)[1] + 50
 				);
 			}
 			
+			Print(ObjImage);
+			Print(ObjText);
+			// pass the markers for this objective, back to the objective component
+			if (objComp.GetMarkerWidgets() == null && ObjImage != null && ObjText != null)
+			{
+				Print("Setting Marker Widgets");
+				Print(ObjImage);
+				Print(ObjText);
+				objComp.SetMarkerWidgets(ObjImage, ObjText);
+			}
 		}
 		super.UpdatePosition();
 	}

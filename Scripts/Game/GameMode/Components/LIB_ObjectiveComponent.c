@@ -46,6 +46,7 @@ class LIB_ObjectiveComponent : ScriptComponent
 	protected ref array<IEntity> m_PopulatedBuildings = {};
 	protected LIB_AiManagerClass m_AiManager;
 	protected LIB_TownManagerComponent m_ObjManager;
+	static ref LIB_MapObjLeftoverUnitsUI m_UnitMapManager;
 	
 	// Should be [ImgWidget, TextWidget]
 	protected ref array<Widget> m_MarkerWidgets = {};
@@ -107,6 +108,24 @@ class LIB_ObjectiveComponent : ScriptComponent
 	float GetObjSpwnRadius()
 	{
 		return m_ObjSpwnRadius;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	/*!
+	
+	*/
+	static void SetUnitMapManager(LIB_MapObjLeftoverUnitsUI mngr)
+	{
+		m_UnitMapManager = mngr;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	/*!
+	
+	*/
+	static LIB_MapObjLeftoverUnitsUI GetUnitMapManager()
+	{
+		return m_UnitMapManager;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -384,8 +403,10 @@ class LIB_ObjectiveComponent : ScriptComponent
 	protected void InitTown(IEntity obj)
 	{
 		int AiCount = 0;
+		int VehCount = 0;
+		int VehCountMax = Math.RandomInt(1, m_ObjMaxVeh);
 		
-		for (int i; AiCount <= m_ObjAiCount; i++)
+		for (int i; AiCount <= (m_ObjAiCount - (VehCountMax * 4)); i++)
 		{
 			IEntity spawnBuilding = GetRandomHouse();
 			if (m_PopulatedBuildings.Find(spawnBuilding) > -1)
@@ -401,21 +422,22 @@ class LIB_ObjectiveComponent : ScriptComponent
 			ResourceName groupToSpawn = m_Config.m_OInfGroups.GetRandomElement();
 			
 			
-			m_Units.Insert(m_AiManager.AiSpawner(groupToSpawn, spawnPosition, waypointType, spawnPosition, group, this));
+			m_AiManager.AiSpawner(groupToSpawn, spawnPosition, spawnPosition, group, this, waypointType);
 			
 			AiCount += group.GetNumberOfMembersToSpawn();
 		}
 		m_OpforTotal += AiCount;
 		
-		for (int i; AiCount <= m_ObjMaxVeh; i++)
+		for (int i; VehCount <= VehCountMax; i++)
 		{
 			IEntity spawnBuilding = GetRandomHouse();
 			vector spawnPosition = spawnBuilding.GetOrigin();
 			
-			m_AiManager.SpawnMannedVeh(m_Config.m_OVehGroups.GetRandomElement(), m_Config.m_OLightFireTeam, spawnPosition);
+			m_AiManager.SpawnMannedVeh(m_Config.m_OVehGroups.GetRandomElement(), m_Config.m_OLightFireTeam, spawnPosition, null, this);
 			
 			// hard coded for now, m_OLightFireTeam has 4 units.
 			m_BluforTotal += 4;
+			VehCount++;
 		}
 	}
 	
@@ -452,6 +474,8 @@ class LIB_ObjectiveComponent : ScriptComponent
 	void OnAgentAdded(AIAgent agent)
 	{
 		IEntity ent = agent.GetControlledEntity();
+		m_Units.Insert(ent);
+		//m_UnitMapManager.m_eUnits.Insert(ent);
 		
 		EventHandlerManagerComponent eventHandler = EventHandlerManagerComponent.Cast(ent.FindComponent(EventHandlerManagerComponent));
         if (!eventHandler)
@@ -495,13 +519,17 @@ class LIB_ObjectiveComponent : ScriptComponent
 		//imgWidget.SetColor(Color.Blue);
 		
 		// Create a marker to point out any remaining units from this objective
-		foreach(IEntity unit : m_Units)
-		{
-			// Attach marker, probably check out mod Unit Map Markers V2
-		}
+		
 		
 		// Announce objective capture
 		m_ObjManager.RemHostileObj(m_ObjectiveEnt);
+		
+		if (!m_UnitMapManager)
+			Print("Manager is null");
+		
+		m_UnitMapManager.AddTrackedUnits(m_Units);	
+		
+		
 		m_ObjManager.AddFriendlyObjArray(m_ObjectiveEnt);
 		m_ObjManager.TellObjCaptured(m_ObjectiveEnt);
 		

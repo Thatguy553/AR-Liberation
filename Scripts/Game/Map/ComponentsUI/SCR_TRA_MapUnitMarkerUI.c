@@ -6,6 +6,7 @@ modded class SCR_TR_MapUnitMarkerUI
 
 	protected bool m_isMapOpen = false;
 	protected ref array<Widget> m_ObjWidgets = {};
+	protected ref array<Widget> m_UnitWidgets = {};
 	protected LIB_TownManagerComponent m_ObjManager = LIB_TownManagerComponent.GetInstance();
 
 	//------------------------------------------------------------------------------------------------
@@ -20,10 +21,9 @@ modded class SCR_TR_MapUnitMarkerUI
 		
 		for (int i; i < m_ObjManager.GetTotalObjCount(); i++)
 		{
-			Widget m_WidgetLayer = GetGame().GetWorkspace().CreateWidgets("{853AB2F886342179}UI/layouts/Objectives/Obj.layout", m_RootWidget);
-			m_ObjWidgets.Insert(m_WidgetLayer);
-		};
-		
+			Widget WidgetLayer = GetGame().GetWorkspace().CreateWidgets("{853AB2F886342179}UI/layouts/Objectives/Obj.layout", m_RootWidget);
+			m_ObjWidgets.Insert(WidgetLayer);
+		}
 		
 		m_MapUnitEntity.GetOnMapPan().Insert(TR_OnMapPan);
 		m_MapUnitEntity.GetOnMapZoom().Insert(TR_OnMapZoom);
@@ -59,6 +59,12 @@ modded class SCR_TR_MapUnitMarkerUI
 		allObjs.InsertAll(m_ObjManager.GetHostileObjArray());
 		allObjs.InsertAll(m_ObjManager.GetFriendlyObjArray());
 		
+		LIB_UpdateMapMarkers(allObjs);
+		super.UpdatePosition();
+	}
+	
+	void LIB_UpdateMapMarkers(array<IEntity> allObjs)
+	{
 		foreach (int currentIndex, IEntity obj : allObjs)
 		{
 			LIB_ObjectiveComponent objComp = LIB_ObjectiveComponent.Cast(obj.FindComponent(LIB_ObjectiveComponent));
@@ -140,17 +146,11 @@ modded class SCR_TR_MapUnitMarkerUI
 				);
 			}
 			
-			Print(ObjImage);
-			Print(ObjText);
 			// pass the markers for this objective, back to the objective component
 			if (objComp.GetMarkerWidgets() == null && ObjImage != null && ObjText != null)
 			{
-				Print("Setting Marker Widgets");
-				Print(ObjImage);
-				Print(ObjText);
 				objComp.SetMarkerWidgets(ObjImage, ObjText);
 			}
 		}
-		super.UpdatePosition();
 	}
 }

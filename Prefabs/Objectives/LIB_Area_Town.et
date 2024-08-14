@@ -1,4 +1,5 @@
-GenericEntity Area_Town : "{C72F956E4AC6A6E7}Prefabs/ScenarioFramework/Components/Area.et" {
+GenericEntity : "{C72F956E4AC6A6E7}Prefabs/ScenarioFramework/Components/Area.et" {
+ ID "59E8CDC4819B4FE1"
  components {
   LIB_ObjectiveComponent "{61B5087A19AD693F}" {
    m_ObjType TOWN
@@ -11,6 +12,7 @@ GenericEntity Area_Town : "{C72F956E4AC6A6E7}Prefabs/ScenarioFramework/Component
  coords 9693.325 13.23 1550.688
  {
   SCR_BaseFactionTriggerEntity Area_Town_Trigger {
+   ID "621B2DCA073E842F"
    userScript "	// code here"\
    "	protected string m_ObjectiveName;"\
    "	protected IEntity m_ObjectiveEntity;"\

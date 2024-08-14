@@ -18,7 +18,7 @@ class LIB_AiManagerClass
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	IEntity AiSpawner(ResourceName spawnGroup, vector spawnPosition, string waypointType, vector waypointPosition, out SCR_AIGroup outGroup, LIB_ObjectiveComponent caller = null)
+	IEntity AiSpawner(ResourceName spawnGroup, vector spawnPosition, vector waypointPosition, out SCR_AIGroup outGroup, LIB_ObjectiveComponent caller = null, string waypointType = "")
 	{
 		Resource resource = GenerateAndValidateResource(spawnGroup);
 		
@@ -30,9 +30,7 @@ class LIB_AiManagerClass
  		
  		// Generate the spawn parameters and spawn the group
 		SCR_AIGroup SpawnedPrefab = SCR_AIGroup.Cast(GetGame().SpawnEntityPrefab(resource, null, GenerateSpawnParameters(spawnPosition)));
- 		//SCR_AIGroup group = SCR_AIGroup.Cast(SpawnedPrefab);
-		
-		// SpawnedPrefab.GetOnAgentAdded().Insert(callback);
+ 		
 		if (caller != null)
 		{
 			SpawnedPrefab.GetOnAgentAdded().Insert(caller.OnAgentAdded);
@@ -53,9 +51,36 @@ class LIB_AiManagerClass
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void SpawnMannedVeh(ResourceName veh, string crew, vector spawnPos)
+	IEntity SpawnMannedVeh(ResourceName veh, string crew, vector spawnPos, out SCR_AIGroup outGrp, LIB_ObjectiveComponent caller = null)
 	{
+		Resource resource = GenerateAndValidateResource(veh);
 		
+		if (!resource)
+ 		{
+ 			Print(("[AI Spawner] Unable able to load resource for the spawn group: " + veh), LogLevel.ERROR);
+ 			return null;
+ 		}
+ 		
+		float areaRadius = 30;
+		
+		if (caller != null)
+		{
+			areaRadius = caller.GetObjSpwnRadius();
+		}
+		
+		vector newSpawnPos;
+		SCR_WorldTools.FindEmptyTerrainPosition(newSpawnPos, spawnPos, areaRadius);
+		
+ 		// Generate the spawn parameters and spawn the group
+		IEntity SpawnedPrefab = GetGame().SpawnEntityPrefab(resource, null, GenerateSpawnParameters(newSpawnPos));
+		
+ 		if (!SpawnedPrefab)
+ 		{
+ 			Print("[AI Spawner] Unable to spawn group!", LogLevel.ERROR);
+ 			return null;
+ 		}
+		
+		return SpawnedPrefab;
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -69,7 +69,7 @@ class LIB_AiManagerClass
 		}
 		
 		vector newSpawnPos;
-		SCR_WorldTools.FindEmptyTerrainPosition(newSpawnPos, spawnPos, areaRadius);
+		SCR_WorldTools.FindEmptyTerrainPosition(newSpawnPos, spawnPos, areaRadius, 2, 4);
 		
  		// Generate the spawn parameters and spawn the group
 		IEntity SpawnedPrefab = GetGame().SpawnEntityPrefab(resource, null, GenerateSpawnParameters(newSpawnPos));

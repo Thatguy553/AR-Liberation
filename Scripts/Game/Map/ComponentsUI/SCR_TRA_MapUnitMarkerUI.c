@@ -1,9 +1,10 @@
-modded class SCR_TR_MapUnitMarkerUI
+class LIB_MapUnitMarkerUI : SCR_MapUIBaseComponent
 {
 	//protected Widget m_WidgetLayer;
 	//protected ImageWidget m_UnitImage;
+	protected float m_iCycleDuration = 0.1;
 	protected SCR_MapEntity m_MapUnitEntity;
-
+	protected float m_fWaitingTime = float.MAX;
 	protected bool m_isMapOpen = false;
 	protected ref array<Widget> m_ObjWidgets = {};
 	protected ref array<Widget> m_UnitWidgets = {};
@@ -28,6 +29,7 @@ modded class SCR_TR_MapUnitMarkerUI
 		m_MapUnitEntity.GetOnMapPan().Insert(TR_OnMapPan);
 		m_MapUnitEntity.GetOnMapZoom().Insert(TR_OnMapZoom);
 		
+		UpdatePosition();
 		super.OnMapOpen(config);
 	}
 	//------------------------------------------------------------------------------------------------
@@ -39,20 +41,28 @@ modded class SCR_TR_MapUnitMarkerUI
 	//------------------------------------------------------------------------------------------------
 	override void Update(float timeSlice)
 	{
+		if (!m_isMapOpen)
+			return;
+		m_fWaitingTime += timeSlice;
+		if (m_fWaitingTime < m_iCycleDuration)
+			return;
+
+		m_fWaitingTime = 0;
+		UpdatePosition();
 		super.Update(timeSlice);
 	}
 	//------------------------------------------------------------------------------------------------
-	override void TR_OnMapPan(float x, float y, bool adjustedPan)
+	void TR_OnMapPan(float x, float y, bool adjustedPan)
 	{	
-		super.TR_OnMapPan(x, y, adjustedPan);
+		UpdatePosition();
 	}
 	//------------------------------------------------------------------------------------------------
-	override void TR_OnMapZoom(float zoomVal)
+	void TR_OnMapZoom(float zoomVal)
 	{
-		super.TR_OnMapZoom(zoomVal);
+		UpdatePosition();
 	}
 	//------------------------------------------------------------------------------------------------
-	override void UpdatePosition()
+	void UpdatePosition()
 	{
 		// Print("--------------------MAPUPDATE----------------", LogLevel.NORMAL);
 		array<IEntity> allObjs = {};
@@ -60,7 +70,6 @@ modded class SCR_TR_MapUnitMarkerUI
 		allObjs.InsertAll(m_ObjManager.GetFriendlyObjArray());
 		
 		LIB_UpdateMapMarkers(allObjs);
-		super.UpdatePosition();
 	}
 	
 	void LIB_UpdateMapMarkers(array<IEntity> allObjs)

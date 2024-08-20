@@ -1,20 +1,29 @@
 FrameWidgetClass {
- Name "rootFrame"
+ Name "ObjCapturedFrame"
  {
   RichTextWidgetClass "{61FE3E8671B8755E}" {
    Name "RichText0"
    Slot FrameWidgetSlot "{61FE3E8671B8752A}" {
-    PositionX 130.861
-    OffsetLeft 130.861
-    PositionY 15.392
-    OffsetTop 15.392
+    PositionX 144.12
+    OffsetLeft 144.12
+    PositionY 49.708
+    OffsetTop 49.708
     SizeX 200
-    OffsetRight -330.861
+    OffsetRight -344.12
     SizeY 100
-    OffsetBottom -115.392
+    OffsetBottom -149.708
+    SizeToContent 1
    }
    Color 0.561 0.439 0.071 1
+   "Font Size" 27
    "Vertical Alignment" Center
+   FontProperties FontProperties "{62275DA23123B92D}" {
+    Font "{8A7666BDEEEF91CA}UI/Fonts/Default/default28.fnt"
+    Bold 1
+    OutlineSize 3
+    OutlineColor 1 1 1 1
+    ShadowSize 3
+   }
   }
   ImageWidgetClass "{61FE3E866E87213F}" {
    Name "Image0"

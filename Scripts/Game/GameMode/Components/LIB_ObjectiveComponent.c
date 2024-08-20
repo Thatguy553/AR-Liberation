@@ -79,6 +79,39 @@ class LIB_ObjectiveComponent : ScriptComponent
 	
 	//------------------------------------------------------------------------------------------------
 	/*!
+		Returns the type of objective as a string. See LIB_EObjType for the currently possible types.
+	*/
+	string GetObjTypeToString(LIB_EObjType type)
+	{
+		string objType;
+		
+		switch(type)
+		{
+			case LIB_EObjType.HQ:
+				objType = "hq";
+				break;
+			case LIB_EObjType.TOWN:
+				objType = "town";
+				break;
+			case LIB_EObjType.CAPITAL:
+				objType = "capital";
+				break;
+			case LIB_EObjType.FACTORY:
+				objType = "fuelstation";
+				break;
+			case LIB_EObjType.MILITARY:
+				objType = "military";
+				break;
+			case LIB_EObjType.RADIO_TOWER:
+				type = "military";
+				break;
+		}
+		
+		return objType;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	/*!
 		Returns [ImageWidget, TextWidget]
 	*/
 	array<Widget> GetMarkerWidgets()
@@ -515,23 +548,21 @@ class LIB_ObjectiveComponent : ScriptComponent
 	void Capture()
 	{
 		// Switch map marker color - Not Necessary
-		//ImageWidget imgWidget = ImageWidget.Cast(m_MarkerWidgets[0]);
-		//imgWidget.SetColor(Color.Blue);
 		
-		// Create a marker to point out any remaining units from this objective
+		// Create a marker to point out any remaining units from this objective - Done
 		
 		
 		// Announce objective capture
 		m_ObjManager.RemHostileObj(m_ObjectiveEnt);
 		
-		if (!m_UnitMapManager)
-			Print("Manager is null");
+		// Only tracks enemy ai if the map manager isnt null
+		if (m_UnitMapManager)
+			m_UnitMapManager.AddTrackedUnits(m_Units);	
 		
-		m_UnitMapManager.AddTrackedUnits(m_Units);	
-		
+		// Popup a ui that leaves after certain time
+		m_ObjManager.TellObjCaptured(m_ObjectiveEnt);
 		
 		m_ObjManager.AddFriendlyObjArray(m_ObjectiveEnt);
-		m_ObjManager.TellObjCaptured(m_ObjectiveEnt);
 		
 		// Changing objective faction is enough for the map marker to auto change.
 		m_ObjFaction = "US";

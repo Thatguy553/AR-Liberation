@@ -1,0 +1,26 @@
+Vehicle : "{4597626AF36C0858}Prefabs/Vehicles/Wheeled/Ural4320/Ural4320.et" {
+ ID "5206D4E7C4A16F13"
+ components {
+  ActionsManagerComponent "{C97BE5489221AE18}" {
+   ActionContexts {
+    UserActionContext "{621D649119B315AB}" {
+     ContextName "build_fob"
+     Position PointInfo "{621D6492193425FC}" {
+      Offset 0 1.9 -3.7776
+     }
+     Height 0
+    }
+   }
+   additionalActions {
+    LIB_BuildFobUserAction "{621D64916460F454}" {
+     ParentContextList {
+      "build_fob"
+     }
+     ActionTitle "Build Fob"
+     VisibilityRange 2
+     Duration 1
+    }
+   }
+  }
+ }
+}

@@ -1,6 +1,6 @@
 class LIB_MapObjLeftoverUnitsUI : SCR_MapUIBaseComponent
 {
-	//protected SCR_MapEntity m_MapUnitEntity;
+	protected SCR_MapEntity m_MapUnitEntity;
 	protected float m_iCycleDuration = 0.1;
 	protected float m_fWaitingTime = float.MAX;
 	protected bool m_isMapOpen = false;
@@ -43,6 +43,10 @@ class LIB_MapObjLeftoverUnitsUI : SCR_MapUIBaseComponent
 		Print("Adding Tracked Units");
 		Print(units);
 		Print(m_eUnits);
+		
+		Print("Tracked Units Instance");
+		Print(m_instance);
+		Print(this);
 		m_eUnits.InsertAll(units);
 		CreateNewUnitWidgets();
 	}
@@ -75,10 +79,14 @@ class LIB_MapObjLeftoverUnitsUI : SCR_MapUIBaseComponent
 		Print(widgetsToCreate);
 		if (widgetsToCreate <= 0)
 			return;
+		
+		Print("New Widgets Instance");
+		Print(m_instance);
+		Print(this);
 
 		for (int i; i < widgetsToCreate; i++)
 		{
-			Widget WidgetLayer = GetGame().GetWorkspace().CreateWidgets("{6AE2BB140C18FD7E}UI/layouts/Map/MapUnitMarker.layout", m_RootWidget);
+			Widget WidgetLayer = GetGame().GetWorkspace().CreateWidgets("{6AE2BB140C18FD7F}UI/layouts/Map/MapUnitMarker.layout", m_RootWidget);
 			m_UnitMapWidgets.Insert(WidgetLayer);
 		}
 
@@ -88,9 +96,9 @@ class LIB_MapObjLeftoverUnitsUI : SCR_MapUIBaseComponent
 	override void OnMapOpen(MapConfiguration config)
 	{
 		super.OnMapOpen(config);
-		m_MapEntity = SCR_MapEntity.GetMapInstance();
 
-		if (!m_MapEntity)
+		m_MapUnitEntity = SCR_MapEntity.GetMapInstance();
+		if (!m_MapUnitEntity)
 			return;
 
 		m_isMapOpen = true;
@@ -98,24 +106,41 @@ class LIB_MapObjLeftoverUnitsUI : SCR_MapUIBaseComponent
 		Print("Map Opened");
 		Print(m_eUnits);
 		Print(m_instance);
+		Print(this);
 
 		if (m_eUnits.Count() >= 1)
 			UpdatePosition();
 
-		m_MapEntity.GetOnMapPan().Insert(LIB_OnMapPan);
-		m_MapEntity.GetOnMapZoom().Insert(LIB_OnMapZoom);
+		m_MapUnitEntity.GetOnMapPan().Insert(LIB_OnMapPan);
+		m_MapUnitEntity.GetOnMapZoom().Insert(LIB_OnMapZoom);
 	}
 
 	//------------------------------------------------------------------------------------------------
 	override protected void OnMapClose(MapConfiguration config)
 	{
-		m_MapEntity.GetOnMapPan().Remove(LIB_OnMapPan);
-		m_MapEntity.GetOnMapZoom().Remove(LIB_OnMapZoom);
+		m_MapUnitEntity.GetOnMapPan().Remove(LIB_OnMapPan);
+		m_MapUnitEntity.GetOnMapZoom().Remove(LIB_OnMapZoom);
 
+		foreach (int currentIndex, Widget unitWidget : m_UnitMapWidgets)
+		{
+			ImageWidget ObjImage = ImageWidget.Cast(unitWidget.FindAnyWidget("Image"));
+			
+			if(ObjImage)
+			{
+				ObjImage.SetVisible(false);				
+			}
+			
+			TextWidget ObjText = TextWidget.Cast(unitWidget.FindAnyWidget("Text"));
+			if(ObjText)
+			{
+				ObjText.SetVisible(false);
+			}
+		}
+		
 		m_isMapOpen = false;
 		super.OnMapClose(config);
 	}
-
+	
 	//------------------------------------------------------------------------------------------------
 	override void Update(float timeSlice)
 	{
@@ -146,26 +171,23 @@ class LIB_MapObjLeftoverUnitsUI : SCR_MapUIBaseComponent
 	{
 		if (m_eUnits.Count() <= 0)
 			return;
-
-		Print("Updating Position");
-		Print(m_eUnits);
-
+		
 		foreach (int currentIndex, IEntity unit : m_eUnits)
 		{
-
+			bool UnitAlive = IsAlive(unit);
 			vector UnitPos = unit.GetOrigin();
 			vector UnitAngles = unit.GetAngles();
 			float screenPosX, screenPosY;
-			float mapZoom = m_MapEntity.GetCurrentZoom();
-			m_MapEntity.WorldToScreen(UnitPos[0], UnitPos[2], screenPosX, screenPosY, true);
+			float mapZoom = m_MapUnitEntity.GetCurrentZoom();
+			m_MapUnitEntity.WorldToScreen(UnitPos[0], UnitPos[2], screenPosX, screenPosY, true);
 			ImageWidget m_UnitImage = ImageWidget.Cast(m_UnitMapWidgets[currentIndex].FindAnyWidget("Image"));
 			screenPosX = GetGame().GetWorkspace().DPIUnscale(screenPosX);
 			screenPosY = GetGame().GetWorkspace().DPIUnscale(screenPosY);
 			if (m_UnitImage)
 			{
-				m_UnitImage.LoadImageTexture(0, "{9731965B995D0B76}UI/Textures/Icons/iconman_ca.edds");
+				m_UnitImage.LoadImageTexture(0, "{067F7C2D05D49085}UI/Textures/Icons/iconman.edds");
 				m_UnitImage.SetColor(Color.Red);
-				m_UnitImage.SetVisible(true);
+				m_UnitImage.SetVisible(UnitAlive);
 				FrameSlot.SetPos(
 					m_UnitImage,
 					screenPosX,
@@ -189,5 +211,23 @@ class LIB_MapObjLeftoverUnitsUI : SCR_MapUIBaseComponent
 			}
 		}
 
+	}
+	
+	static bool IsAlive(IEntity entity)
+	{
+	    if (!entity)
+	        return false;
+	    
+	    DamageManagerComponent damageManager;
+	    ChimeraCharacter character = ChimeraCharacter.Cast(entity);
+	    if (character)
+	        damageManager = character.GetDamageManager();
+	    else
+	        damageManager = DamageManagerComponent.Cast(entity.FindComponent(DamageManagerComponent));
+	    
+	    if (!damageManager)
+	        return true;
+	    
+	    return damageManager.GetState() != EDamageState.DESTROYED;
 	}
 }

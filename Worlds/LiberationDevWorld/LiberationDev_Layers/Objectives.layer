@@ -1,3 +1,9 @@
+Vehicle Ural4320_command1 : "{1BABF6B33DA0AEB6}Prefabs/Vehicles/Wheeled/Ural4320/Ural4320_command.et" {
+ coords 9113.116 72.798 2231.542
+ angleX 3.576
+ angleY 0.056
+ angleZ 0.897
+}
 GenericEntity Area_Town : "{C72F956E4AC6A6E7}Prefabs/ScenarioFramework/Components/Area.et" {
  components {
   LIB_ObjectiveComponent "{61B5087A19AD693F}" {

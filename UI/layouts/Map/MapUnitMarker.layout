@@ -1,0 +1,58 @@
+FrameWidgetClass {
+ Name "rootFrame"
+ Slot FrameWidgetSlot "{596D060888C1E9BB}" {
+  PositionX 0
+  OffsetLeft 0
+  PositionY 0
+  OffsetTop 0
+  SizeX 30
+  OffsetRight -30
+  SizeY 30
+  OffsetBottom -30
+  SizeToContent 1
+ }
+ "Z Order" 999
+ Color 1 1 1 0
+ {
+  ImageWidgetClass "{621F7C1A9DABEC25}" {
+   Name "Image"
+   Slot FrameWidgetSlot "{596D15F06B0B2C13}" {
+    Anchor 0 0 0 0
+    PositionX 0
+    OffsetLeft 0
+    PositionY 0
+    OffsetTop 0
+    SizeX 30
+    OffsetRight -30
+    SizeY 30
+    OffsetBottom -30
+    Alignment 0.5 0.5
+   }
+   "Is Visible" 0
+   Texture "{067F7C2D05D49085}UI/Textures/Icons/iconman.edds"
+   Size 64 64
+  }
+  TextWidgetClass "{621F7C1A9DABEC2F}" {
+   Name "Text"
+   Slot FrameWidgetSlot "{5CAAF994FF821CFD}" {
+    PositionX 0
+    OffsetLeft 0
+    PositionY 0
+    OffsetTop 0
+    SizeX 100
+    OffsetRight -100
+    SizeY 13
+    OffsetBottom -13
+    Alignment 0.5 -0.8
+    SizeToContent 1
+   }
+   "Font Size" 13
+   "Min Font Size" 13
+   "Horizontal Alignment" Center
+   FontProperties FontProperties "{5CAC980B6ED05936}" {
+    Font "{E2CBA6F76AAA42AF}UI/Fonts/Roboto/Roboto_Regular.fnt"
+    Bold 1
+   }
+  }
+ }
+}

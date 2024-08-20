@@ -204,16 +204,60 @@ class LIB_TownManagerComponent : ScriptComponent
 	//------------------------------------------------------------------------------------------------
 	/*!
 		Should handle popping up the UI on players screens to announce
+		
+		obj = Entity with all objective related components on it
+		hide = Will hide the ui instead of creating a new ui, or setting an existing ui visible.
 	*/
-	void TellObjCaptured(IEntity obj)
+	void TellObjCaptured(IEntity obj, bool hide = false)
 	{
+		TellObjUIChange(obj, "ObjCapturedFrame", "{7BAC737E810740B2}UI/layouts/Objectives/ObjCaptured.layout", true);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	/*!
 		Should handle popping up the UI on players screens to announce
 	*/
-	void TellObjLost(IEntity obj)
+	void TellObjLost(IEntity obj, bool hide = false)
 	{
+		TellObjUIChange(obj, "ObjCapturedFrame", "{7BAC737E810740B2}UI/layouts/Objectives/ObjCaptured.layout", false);
+	}
+	
+	void TellObjUIChange(IEntity obj, string widgetName, ResourceName widgetPath, bool captured, bool hide = false)
+	{
+		LIB_ObjectiveComponent objComp = LIB_ObjectiveComponent.Cast(obj.FindComponent(LIB_ObjectiveComponent));
+		
+		WorkspaceWidget workspace = GetGame().GetWorkspace();
+		
+		Widget WidgetLayer = workspace.FindWidget(widgetName);
+		
+				
+		if (!WidgetLayer)
+		{
+			WidgetLayer = workspace.CreateWidgets(widgetPath);
+		}
+		
+		ImageWidget uiImage = ImageWidget.Cast(WidgetLayer.FindAnyWidget("Image0"));
+		if (uiImage && !hide)
+		{
+			uiImage.LoadImageFromSet(0, "{B003950B54B7AA46}UI/Textures/Icons/lib_markers.imageset", objComp.GetObjTypeToString(objComp.GetObjType()));
+			uiImage.SetColor(Color.Blue);
+		}
+		
+		uiImage.SetVisible(!hide);
+
+		string capturedString = "captured";
+		if (!captured)
+			capturedString = "false";
+		
+		TextWidget uiText = TextWidget.Cast(WidgetLayer.FindAnyWidget("RichText0"));
+		if (uiText && !hide)
+		{
+			uiText.SetColor(Color.Black);
+			uiText.SetText(string.Format("Objective %1 has been %2!", objComp.GetObjName(), capturedString));
+		}
+		uiText.SetVisible(!hide);
+		
+		if (!hide)
+			GetGame().GetCallqueue().CallLater(TellObjUIChange, 15000, false, obj, widgetName, widgetPath, captured, true);
 	}
 };

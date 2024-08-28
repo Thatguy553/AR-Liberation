@@ -11,7 +11,7 @@ class LIB_TownManagerComponent : ScriptComponent
 	protected ref array<array<Widget>> m_ObjMarkerArr = {};
 	protected ref array<IEntity> m_ObjActiveArr = {};
 	protected int m_TotalObjCount = 0;
-	
+
 	//------------------------------------------------------------------------------------------------
 	/*!
 		Gets the currently active Objective Manager Componenent instance. If one does not exist, creates one.

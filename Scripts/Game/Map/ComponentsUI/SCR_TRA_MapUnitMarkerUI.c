@@ -1,3 +1,5 @@
+// At some point should rename this file and class to something along the lines of LIB_MapObjMarkerUI
+
 class LIB_MapUnitMarkerUI : SCR_MapUIBaseComponent
 {
 	//protected Widget m_WidgetLayer;
@@ -7,12 +9,12 @@ class LIB_MapUnitMarkerUI : SCR_MapUIBaseComponent
 	protected float m_fWaitingTime = float.MAX;
 	protected bool m_isMapOpen = false;
 	protected ref array<Widget> m_ObjWidgets = {};
-	protected ref array<Widget> m_UnitWidgets = {};
 	protected LIB_TownManagerComponent m_ObjManager = LIB_TownManagerComponent.GetInstance();
 
 	//------------------------------------------------------------------------------------------------
 	override void OnMapOpen(MapConfiguration config)
 	{
+		super.OnMapOpen(config);
 		//Print("--------------------MAPOPEN----------------", LogLevel.NORMAL);
 		m_MapUnitEntity = SCR_MapEntity.GetMapInstance();
 		if (!m_MapUnitEntity) return;
@@ -30,7 +32,6 @@ class LIB_MapUnitMarkerUI : SCR_MapUIBaseComponent
 		m_MapUnitEntity.GetOnMapZoom().Insert(TR_OnMapZoom);
 		
 		UpdatePosition();
-		super.OnMapOpen(config);
 	}
 	//------------------------------------------------------------------------------------------------
 	override void OnMapClose(MapConfiguration config)

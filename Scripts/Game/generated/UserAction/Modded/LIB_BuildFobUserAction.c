@@ -22,11 +22,17 @@ class LIB_BuildFobUserAction : ScriptedUserAction
 	protected bool m_InHand = false;
 	protected bool m_bActivated = false;
 
+	protected LIB_BuildStructureComponent placingStructureComp;
 	
 	//------------------------------------------------------------------------------------------------
 	// {4BE4C27399CF3B00}Prefabs/Structures/Military/Bunkers/ShelterMilitary_E_01/ShelterMilitary_E_01.et
 	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity)
 	{
+		PlayerController plyr = GetGame().GetPlayerController();
+		placingStructureComp = LIB_BuildStructureComponent.Cast(plyr.FindComponent(LIB_BuildStructureComponent));
+		
+		placingStructureComp.createStructurePreview("{4BE4C27399CF3B00}Prefabs/Structures/Military/Bunkers/ShelterMilitary_E_01/ShelterMilitary_E_01.et", 10, 10, true);
+		
 		/*
 		RandomGenerator randomGenerator = new RandomGenerator();
 		vector teleportPosition = randomGenerator.GenerateRandomPointInRadius(m_iSpawnMinDist, m_iSpawnMaxDist, m_vTeleportDestination);

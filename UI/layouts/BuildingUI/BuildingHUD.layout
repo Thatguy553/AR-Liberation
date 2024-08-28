@@ -1,0 +1,703 @@
+FrameWidgetClass {
+ Name "BuildControls"
+ {
+  GridLayoutWidgetClass "{62382CA4771395D8}" {
+   Name "GridLayout0"
+   Slot FrameWidgetSlot "{62382CA4771395A2}" {
+    PositionX 254.604
+    OffsetLeft 254.604
+    PositionY 999.702
+    OffsetTop 999.702
+    SizeX 559.988
+    OffsetRight -814.592
+    SizeY 63.508
+    OffsetBottom -1063.21
+   }
+   RowFill {
+    2 3.5
+   }
+   ColumnFill {
+    1 1 1 1 1 1 1 1 1.2 1.2
+   }
+   {
+    RichTextWidgetClass "{62382CA580B0C081}" {
+     Name "text_mouse1_cancel"
+     Slot GridWidgetSlot "{62382CA580B0C06E}" {
+      HorizontalAlign 1
+      VerticalAlign 1
+      Row 0
+      Column 9
+     }
+     Color 0 0 0 1
+     Text "Cancel"
+     "Font Size" 20
+     "Min Font Size" 20
+     FontProperties FontProperties "{62382CA75336F632}" {
+      Bold 1
+      OutlineSize 2
+      OutlineColor 1 1 1 1
+      ShadowOffset 0 0
+     }
+    }
+    RichTextWidgetClass "{62382CA5819A6476}" {
+     Name "text_mouse0_confirm"
+     Slot GridWidgetSlot "{62382CA5819A6458}" {
+      HorizontalAlign 1
+      VerticalAlign 1
+      Row 0
+      Column 8
+     }
+     Color 0 0 0 1
+     Text "Confirm"
+     "Font Size" 20
+     "Min Font Size" 20
+     FontProperties FontProperties "{62382CA747F7CCFF}" {
+      Bold 1
+      OutlineSize 2
+      OutlineColor 1 1 1 1
+      ShadowOffset 0 0
+     }
+    }
+    RichTextWidgetClass "{62382CA586C5448D}" {
+     Name "text_bracket_rotation"
+     Slot GridWidgetSlot "{62382CA586C5445B}" {
+      HorizontalAlign 1
+      VerticalAlign 1
+      Row 0
+      Column 6
+      ColumnSpan 2
+     }
+     Color 0 0 0 1
+     Text "Rotation"
+     FontProperties FontProperties "{62382CA73396BFF5}" {
+      Bold 1
+      OutlineSize 2
+      OutlineColor 1 1 1 1
+      ShadowOffset 0 0
+     }
+    }
+    RichTextWidgetClass "{62382CA584442128}" {
+     Name "text_qe_elevation"
+     Slot GridWidgetSlot "{62382CA5844420F2}" {
+      HorizontalAlign 1
+      VerticalAlign 1
+      Row 0
+      Column 4
+      ColumnSpan 2
+     }
+     Color 0 0 0 1
+     Text "Elevation"
+     "Min Font Size" 12
+     FontProperties FontProperties "{62382CA7C021FC27}" {
+      Bold 1
+      OutlineSize 2
+      OutlineColor 1 1 1 1
+      ShadowOffset 0 0
+     }
+    }
+    RichTextWidgetClass "{62382CA45CCB8445}" {
+     Name "text_arrow_movement"
+     Slot GridWidgetSlot "{62382CA45CCB842D}" {
+      HorizontalAlign 1
+      VerticalAlign 1
+      Row 0
+      Column 1
+      ColumnSpan 2
+     }
+     Color 0 0 0 1
+     Text "Movement"
+     "Min Font Size" 19
+     FontProperties FontProperties "{62382CA7E7F40177}" {
+      Bold 1
+      OutlineSize 2
+      OutlineColor 1 1 1 1
+     }
+    }
+    FrameWidgetClass "{62382CA8E18E6408}" {
+     Name "right_key_frame"
+     Slot GridWidgetSlot "{62382CA8E18E63DC}" {
+      HorizontalAlign 1
+      VerticalAlign 1
+      Row 1
+      Column 3
+     }
+     {
+      ImageWidgetClass "{62382CA6FE729F40}" {
+       Name "key_filling_right_arrow"
+       Slot FrameWidgetSlot "{62382CA8FA2AD47C}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       Color 0.682 0.287 0.005 1
+       Texture "{188C606CD79F9FDC}UI/Textures/Icons/icons_keyboard/icons_keyboard.imageset"
+       Image "key"
+       Size 64 64
+      }
+      ImageWidgetClass "{62382CA5A538EB78}" {
+       Name "key_outline_right_arrow"
+       Slot FrameWidgetSlot "{62382CA8FA2AD4CE}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       Texture "{188C606CD79F9FDC}UI/Textures/Icons/icons_keyboard/icons_keyboard.imageset"
+       Image "key_outline"
+       Size 64 64
+      }
+      ImageWidgetClass "{62382CA60AA1EB77}" {
+       Name "key_icon_right_arrow"
+       Slot FrameWidgetSlot "{62382CA8FA2AD455}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       Color 0 0 0 1
+       Texture "{188C606CD79F9FDC}UI/Textures/Icons/icons_keyboard/icons_keyboard.imageset"
+       Image "right"
+       Size 64 64
+      }
+     }
+    }
+    FrameWidgetClass "{62382CA9952BBCE7}" {
+     Name "left_key_frame"
+     Slot GridWidgetSlot "{62382CA8E18E63DC}" {
+      HorizontalAlign 1
+      VerticalAlign 1
+      Row 1
+      Column 0
+     }
+     {
+      ImageWidgetClass "{62382CA9952BBCE5}" {
+       Name "key_filling_left_arrow"
+       Slot FrameWidgetSlot "{62382CA8FA2AD47C}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       Color 0.682 0.287 0.005 1
+       Texture "{188C606CD79F9FDC}UI/Textures/Icons/icons_keyboard/icons_keyboard.imageset"
+       Image "key"
+       Size 64 64
+      }
+      ImageWidgetClass "{62382CA9952BBCE4}" {
+       Name "key_outline_left_arrow"
+       Slot FrameWidgetSlot "{62382CA8FA2AD4CE}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       Texture "{188C606CD79F9FDC}UI/Textures/Icons/icons_keyboard/icons_keyboard.imageset"
+       Image "key_outline"
+       Size 64 64
+      }
+      ImageWidgetClass "{62382CA9952BBCEB}" {
+       Name "key_icon_left_arrow"
+       Slot FrameWidgetSlot "{62382CA8FA2AD455}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       Color 0 0 0 1
+       Texture "{188C606CD79F9FDC}UI/Textures/Icons/icons_keyboard/icons_keyboard.imageset"
+       Image "left"
+       Size 64 64
+      }
+     }
+    }
+    FrameWidgetClass "{62382CA9EA2DC0AE}" {
+     Name "up_key_frame"
+     Slot GridWidgetSlot "{62382CA8E18E63DC}" {
+      HorizontalAlign 1
+      VerticalAlign 1
+      Row 1
+      Column 1
+     }
+     {
+      ImageWidgetClass "{62382CA9EA2DC0AD}" {
+       Name "key_filling_up_arrow"
+       Slot FrameWidgetSlot "{62382CA8FA2AD47C}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       Color 0.682 0.287 0.005 1
+       Texture "{188C606CD79F9FDC}UI/Textures/Icons/icons_keyboard/icons_keyboard.imageset"
+       Image "key"
+       Size 64 64
+      }
+      ImageWidgetClass "{62382CA9EA2DC093}" {
+       Name "key_outline_up_arrow"
+       Slot FrameWidgetSlot "{62382CA8FA2AD4CE}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       Texture "{188C606CD79F9FDC}UI/Textures/Icons/icons_keyboard/icons_keyboard.imageset"
+       Image "key_outline"
+       Size 64 64
+      }
+      ImageWidgetClass "{62382CA9EA2DC092}" {
+       Name "key_icon_up_arrow"
+       Slot FrameWidgetSlot "{62382CA8FA2AD455}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       Color 0 0 0 1
+       Texture "{188C606CD79F9FDC}UI/Textures/Icons/icons_keyboard/icons_keyboard.imageset"
+       Image "up"
+       Size 64 64
+      }
+     }
+    }
+    FrameWidgetClass "{62382CA9DDD0DE76}" {
+     Name "down_key_frame"
+     Slot GridWidgetSlot "{62382CA8E18E63DC}" {
+      HorizontalAlign 1
+      VerticalAlign 1
+      Row 1
+      Column 2
+     }
+     {
+      ImageWidgetClass "{62382CA9DDD0DE75}" {
+       Name "key_filling_down_arrow"
+       Slot FrameWidgetSlot "{62382CA8FA2AD47C}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       Color 0.682 0.287 0.005 1
+       Texture "{188C606CD79F9FDC}UI/Textures/Icons/icons_keyboard/icons_keyboard.imageset"
+       Image "key"
+       Size 64 64
+      }
+      ImageWidgetClass "{62382CA9DDD0DE74}" {
+       Name "key_outline_down_arrow"
+       Slot FrameWidgetSlot "{62382CA8FA2AD4CE}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       Texture "{188C606CD79F9FDC}UI/Textures/Icons/icons_keyboard/icons_keyboard.imageset"
+       Image "key_outline"
+       Size 64 64
+      }
+      ImageWidgetClass "{62382CA9DDD0DE7B}" {
+       Name "key_icon_down_arrow"
+       Slot FrameWidgetSlot "{62382CA8FA2AD455}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       Color 0 0 0 1
+       Texture "{188C606CD79F9FDC}UI/Textures/Icons/icons_keyboard/icons_keyboard.imageset"
+       Image "down"
+       Size 64 64
+      }
+     }
+    }
+    FrameWidgetClass "{62382CA9086FD478}" {
+     Name "q_key_frame"
+     Slot GridWidgetSlot "{62382CA8E18E63DC}" {
+      HorizontalAlign 1
+      VerticalAlign 1
+      Row 1
+      Column 4
+     }
+     {
+      RichTextWidgetClass "{62382CA963B014FA}" {
+       Name "key_text_q"
+       Slot FrameWidgetSlot "{62382CA963B014DB}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       "Z Order" 2
+       Color 0 0 0 1
+       Text "Q"
+       "Font Size" 20
+       "Min Font Size" 20
+       "Horizontal Alignment" Center
+       "Vertical Alignment" Center
+       FontProperties FontProperties "{62382CAAA129299A}" {
+        Font "{0E041C5B1F27DCEA}ui/fonts/robotomono_msdf_28.fnt"
+        Bold 1
+       }
+       "Line Spacing" 0
+      }
+      ImageWidgetClass "{62382CA9086FD47F}" {
+       Name "key_filling_q"
+       Slot FrameWidgetSlot "{62382CA8FA2AD47C}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       Color 0.682 0.287 0.005 1
+       Texture "{188C606CD79F9FDC}UI/Textures/Icons/icons_keyboard/icons_keyboard.imageset"
+       Image "key"
+       Size 64 64
+      }
+      ImageWidgetClass "{62382CA9086FD47D}" {
+       Name "key_outline_q"
+       Slot FrameWidgetSlot "{62382CA8FA2AD4CE}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       Texture "{188C606CD79F9FDC}UI/Textures/Icons/icons_keyboard/icons_keyboard.imageset"
+       Image "key_outline"
+       Size 64 64
+      }
+     }
+    }
+    FrameWidgetClass "{62382CAA8803D347}" {
+     Name "e_key_frame"
+     Slot GridWidgetSlot "{62382CA8E18E63DC}" {
+      HorizontalAlign 1
+      VerticalAlign 1
+      Row 1
+      Column 5
+     }
+     {
+      RichTextWidgetClass "{62382CAA8803D345}" {
+       Name "key_text_e"
+       Slot FrameWidgetSlot "{62382CA963B014DB}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       "Z Order" 2
+       Color 0 0 0 1
+       Text "E"
+       "Font Size" 20
+       "Min Font Size" 20
+       "Horizontal Alignment" Center
+       "Vertical Alignment" Center
+       FontProperties FontProperties "{62382CAAA129299A}" {
+        Font "{0E041C5B1F27DCEA}ui/fonts/robotomono_msdf_28.fnt"
+        Bold 1
+       }
+       "Line Spacing" 0
+      }
+      ImageWidgetClass "{62382CAA8803D34A}" {
+       Name "key_filling_e"
+       Slot FrameWidgetSlot "{62382CA8FA2AD47C}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       Color 0.682 0.287 0.005 1
+       Texture "{188C606CD79F9FDC}UI/Textures/Icons/icons_keyboard/icons_keyboard.imageset"
+       Image "key"
+       Size 64 64
+      }
+      ImageWidgetClass "{62382CAA88032E62}" {
+       Name "key_outline_e"
+       Slot FrameWidgetSlot "{62382CA8FA2AD4CE}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       Texture "{188C606CD79F9FDC}UI/Textures/Icons/icons_keyboard/icons_keyboard.imageset"
+       Image "key_outline"
+       Size 64 64
+      }
+     }
+    }
+    FrameWidgetClass "{62382CAAE0F1B54C}" {
+     Name "lbracket_key_frame"
+     Slot GridWidgetSlot "{62382CA8E18E63DC}" {
+      HorizontalAlign 1
+      VerticalAlign 1
+      Row 1
+      Column 6
+     }
+     {
+      RichTextWidgetClass "{62382CAAE0F1B543}" {
+       Name "key_text_lbracket"
+       Slot FrameWidgetSlot "{62382CA963B014DB}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       "Z Order" 2
+       Color 0 0 0 1
+       Text "["
+       "Font Size" 18
+       "Min Font Size" 18
+       "Horizontal Alignment" Center
+       "Vertical Alignment" Center
+       FontProperties FontProperties "{62382CAAA129299A}" {
+        Font "{0E041C5B1F27DCEA}ui/fonts/robotomono_msdf_28.fnt"
+        Bold 1
+       }
+       "Line Spacing" 0
+      }
+      ImageWidgetClass "{62382CAAE0F1B542}" {
+       Name "key_filling_lbracket"
+       Slot FrameWidgetSlot "{62382CA8FA2AD47C}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       Color 0.682 0.287 0.005 1
+       Texture "{188C606CD79F9FDC}UI/Textures/Icons/icons_keyboard/icons_keyboard.imageset"
+       Image "key"
+       Size 64 64
+      }
+      ImageWidgetClass "{62382CAAE0F1B541}" {
+       Name "key_outline_lbracket"
+       Slot FrameWidgetSlot "{62382CA8FA2AD4CE}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       Texture "{188C606CD79F9FDC}UI/Textures/Icons/icons_keyboard/icons_keyboard.imageset"
+       Image "key_outline"
+       Size 64 64
+      }
+     }
+    }
+    FrameWidgetClass "{62382CAAC2A1D574}" {
+     Name "rbracket_key_frame"
+     Slot GridWidgetSlot "{62382CA8E18E63DC}" {
+      HorizontalAlign 1
+      VerticalAlign 1
+      Row 1
+      Column 7
+     }
+     {
+      RichTextWidgetClass "{62382CAAC2A1D56B}" {
+       Name "key_text_rbracket"
+       Slot FrameWidgetSlot "{62382CA963B014DB}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       "Z Order" 2
+       Color 0 0 0 1
+       Text "]"
+       "Font Size" 18
+       "Min Font Size" 18
+       "Horizontal Alignment" Center
+       "Vertical Alignment" Center
+       FontProperties FontProperties "{62382CAAA129299A}" {
+        Font "{0E041C5B1F27DCEA}ui/fonts/robotomono_msdf_28.fnt"
+        Bold 1
+       }
+       "Line Spacing" 0
+      }
+      ImageWidgetClass "{62382CAAC2A1D56A}" {
+       Name "key_filling_rbracket"
+       Slot FrameWidgetSlot "{62382CA8FA2AD47C}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       Color 0.682 0.287 0.005 1
+       Texture "{188C606CD79F9FDC}UI/Textures/Icons/icons_keyboard/icons_keyboard.imageset"
+       Image "key"
+       Size 64 64
+      }
+      ImageWidgetClass "{62382CAAC2A1D569}" {
+       Name "key_outline_rbracket"
+       Slot FrameWidgetSlot "{62382CA8FA2AD4CE}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       Texture "{188C606CD79F9FDC}UI/Textures/Icons/icons_keyboard/icons_keyboard.imageset"
+       Image "key_outline"
+       Size 64 64
+      }
+     }
+    }
+    FrameWidgetClass "{62382CAA34970F1B}" {
+     Name "mouse0_key_frame"
+     Slot GridWidgetSlot "{62382CA8E18E63DC}" {
+      HorizontalAlign 1
+      VerticalAlign 1
+      Row 1
+      Column 8
+     }
+     {
+      ImageWidgetClass "{62382CAA34970F19}" {
+       Name "mouse_lmb_mouse0"
+       Slot FrameWidgetSlot "{62382CA8FA2AD47C}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       "Z Order" 2
+       Color 0 0 0 1
+       Texture "{013E6F671529A284}UI/Textures/Icons/icons_mouse/icons_mouse.imageset"
+       Image "LMB"
+       Size 64 64
+      }
+      ImageWidgetClass "{62382CAA34970F18}" {
+       Name "mouse_outline_mouse0"
+       Slot FrameWidgetSlot "{62382CA8FA2AD4CE}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       Texture "{013E6F671529A284}UI/Textures/Icons/icons_mouse/icons_mouse.imageset"
+       Image "outline"
+       Size 64 64
+      }
+      ImageWidgetClass "{62382CAA7D95094D}" {
+       Name "mouse_filling_mouse0"
+       Slot FrameWidgetSlot "{62382CA8FA2AD47C}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       Color 0.682 0.287 0.005 1
+       Texture "{013E6F671529A284}UI/Textures/Icons/icons_mouse/icons_mouse.imageset"
+       Image "background"
+       Size 64 64
+      }
+     }
+    }
+    FrameWidgetClass "{62382CAA51C1CE6A}" {
+     Name "mouse1_key_frame"
+     Slot GridWidgetSlot "{62382CA8E18E63DC}" {
+      HorizontalAlign 1
+      VerticalAlign 1
+      Row 1
+      Column 9
+     }
+     {
+      ImageWidgetClass "{62382CAA51C1CE68}" {
+       Name "mouse_rmb_mouse1"
+       Slot FrameWidgetSlot "{62382CA8FA2AD47C}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       "Z Order" 2
+       Color 0 0 0 1
+       Texture "{013E6F671529A284}UI/Textures/Icons/icons_mouse/icons_mouse.imageset"
+       Image "RMB"
+       Size 64 64
+      }
+      ImageWidgetClass "{62382CAA51C1CE6E}" {
+       Name "mouse_outline_mouse1"
+       Slot FrameWidgetSlot "{62382CA8FA2AD4CE}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       Texture "{013E6F671529A284}UI/Textures/Icons/icons_mouse/icons_mouse.imageset"
+       Image "outline"
+       Size 64 64
+      }
+      ImageWidgetClass "{62382CAA51C1CE6D}" {
+       Name "mouse_filling_mouse1"
+       Slot FrameWidgetSlot "{62382CA8FA2AD47C}" {
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 50
+        OffsetRight -50
+        SizeY 40
+        OffsetBottom -40
+       }
+       Color 0.682 0.287 0.005 1
+       Texture "{013E6F671529A284}UI/Textures/Icons/icons_mouse/icons_mouse.imageset"
+       Image "background"
+       Size 64 64
+      }
+     }
+    }
+   }
+  }
+ }
+}

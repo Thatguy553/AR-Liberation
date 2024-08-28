@@ -1,6 +1,10 @@
 [BaseContainerProps(configRoot: true)]
 class TRA_GlobalConfig
 {
+	// Gamemode related configs
+	[Attribute(defvalue: "1", desc: "Should remaining Ai enemy be marked upon base capture?", category: "Gamemode Configs")]
+	bool m_RemainingMarker;
+	
 	// Self explanatory, opfor group prefabs
 	[Attribute(defvalue: "", desc: "Opfor Fire Team", category: "Group Prefabs", params: "et")]
 	ResourceName m_OFireTeam;
@@ -37,6 +41,35 @@ class TRA_GlobalConfig
 	
 	[Attribute(defvalue: "", desc: "Opfor Vehicle Prefabs Array", category: "Vehicle Prefabs Array")]
 	ref array<ResourceName> m_OVehGroups;
+	
+	//------------------------------------------------------------------------------------------------
+	// Unit Waypoints
+	[Attribute(defvalue: "{93291E72AC23930F}Prefabs/AI/Waypoints/AIWaypoint_Defend.et", desc: "Defend Waypoint", category: "Unit Waypoints")]
+	ResourceName m_WaypointDefend;
+	
+	[Attribute(defvalue: "{1B0E3436C30FA211}Prefabs/AI/Waypoints/AIWaypoint_Attack.et", desc: "Defend Waypoint", category: "Unit Waypoints")]
+	ResourceName m_WaypointAttack;
+	
+	[Attribute(defvalue: "{712F4795CF8B91C7}Prefabs/AI/Waypoints/AIWaypoint_GetIn.et", desc: "Defend Waypoint", category: "Unit Waypoints")]
+	ResourceName m_WaypointGetIn;
+	
+	[Attribute(defvalue: "{06E1B6EBD480C6E0}Prefabs/AI/Waypoints/AIWaypoint_ForcedMove.et", desc: "Defend Waypoint", category: "Unit Waypoints")]
+	ResourceName m_WaypointForcedMove;
+	
+	[Attribute(defvalue: "{A0509D3C4DD4475E}Prefabs/AI/Waypoints/AIWaypoint_Follow.et", desc: "Defend Waypoint", category: "Unit Waypoints")]
+	ResourceName m_WaypointFollow;
+	
+	[Attribute(defvalue: "{B049D4C74FBC0C4D}Prefabs/AI/Waypoints/AIWaypoint_GetInNearest.et", desc: "Defend Waypoint", category: "Unit Waypoints")]
+	ResourceName m_WaypointGetInNearest;
+	
+	[Attribute(defvalue: "{750A8D1695BD6998}Prefabs/AI/Waypoints/AIWaypoint_Move.et", desc: "Defend Waypoint", category: "Unit Waypoints")]
+	ResourceName m_WaypointMove;
+	
+	[Attribute(defvalue: "{22A875E30470BD4F}Prefabs/AI/Waypoints/AIWaypoint_Patrol.et", desc: "Defend Waypoint", category: "Unit Waypoints")]
+	ResourceName m_WaypointPatrol;
+	
+	[Attribute(defvalue: "{A88F0B6CF25BD1DE}Prefabs/AI/Waypoints/AIWaypoint_Scout.et", desc: "Defend Waypoint", category: "Unit Waypoints")]
+	ResourceName m_WaypointScout;
 	
 	//------------------------------------------------------------------------------------------------
 	// Fob related data

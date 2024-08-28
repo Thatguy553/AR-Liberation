@@ -13,13 +13,12 @@ class LIB_MapObjLeftoverUnitsUI : SCR_MapUIBaseComponent
 	// constructor
 	void LIB_MapObjLeftoverUnitsUI()
 	{
-		Print("[LIB] Leftover UI");
 		if (!m_instance)
 			m_instance = this;
 
 		LIB_ObjectiveComponent.SetUnitMapManager(m_instance);
 	}
-
+	
 	//------------------------------------------------------------------------------------------------
 	//! 
 	//! \return
@@ -40,13 +39,6 @@ class LIB_MapObjLeftoverUnitsUI : SCR_MapUIBaseComponent
 	//! \param[in] units
 	void AddTrackedUnits(array<IEntity> units)
 	{
-		Print("Adding Tracked Units");
-		Print(units);
-		Print(m_eUnits);
-		
-		Print("Tracked Units Instance");
-		Print(m_instance);
-		Print(this);
 		m_eUnits.InsertAll(units);
 		CreateNewUnitWidgets();
 	}
@@ -56,9 +48,6 @@ class LIB_MapObjLeftoverUnitsUI : SCR_MapUIBaseComponent
 	//! \param[in] unit
 	void AddTrackedUnits(IEntity unit)
 	{
-		Print("Adding Tracked Unit");
-		Print(unit);
-
 		m_eUnits.Insert(unit);
 		CreateNewUnitWidgets();
 	}
@@ -67,7 +56,6 @@ class LIB_MapObjLeftoverUnitsUI : SCR_MapUIBaseComponent
 	//!
 	void CreateNewUnitWidgets()
 	{
-		Print("Creating New Widgets");
 		if (m_eUnits.Count() <= 0)
 			return;
 
@@ -75,14 +63,8 @@ class LIB_MapObjLeftoverUnitsUI : SCR_MapUIBaseComponent
 		int unitCount = m_eUnits.Count();
 		int widgetsToCreate = unitCount - widgetCount;
 
-		Print(m_eUnits);
-		Print(widgetsToCreate);
 		if (widgetsToCreate <= 0)
 			return;
-		
-		Print("New Widgets Instance");
-		Print(m_instance);
-		Print(this);
 
 		for (int i; i < widgetsToCreate; i++)
 		{
@@ -102,12 +84,7 @@ class LIB_MapObjLeftoverUnitsUI : SCR_MapUIBaseComponent
 			return;
 
 		m_isMapOpen = true;
-
-		Print("Map Opened");
-		Print(m_eUnits);
-		Print(m_instance);
-		Print(this);
-
+		
 		if (m_eUnits.Count() >= 1)
 			UpdatePosition();
 

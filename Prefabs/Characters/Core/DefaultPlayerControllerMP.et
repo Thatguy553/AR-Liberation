@@ -1,0 +1,9 @@
+SCR_PlayerController : "{6E2BB64764E3BE9B}Prefabs/Characters/Core/DefaultPlayerController.et" {
+ ID "1A9BA6BEFA06E3B1"
+ components {
+  LIB_BuildStructureComponent "{622C1C54168CEAC8}" {
+  }
+  LIB_NetworkComponent "{62382CA3E7ACB528}" {
+  }
+ }
+}

@@ -33,6 +33,9 @@ class LIB_ObjectiveComponent : ScriptComponent
 	[Attribute(category: "Objective Settings", defvalue: "30", desc: "The amount of ai infantry that should spawn at this objective")]
 	protected int m_ObjAiCount;
 	
+	[Attribute(category: "Objective Settings", defvalue: "30", desc: "The amount of ai infantry that should spawn indoors, should be equal too or less than the objective ai count.")]
+	protected int m_ObjAiInside;
+	
 	[Attribute(category: "Objective Settings", defvalue: "3", desc: "The max amount of manned vehicles that can spawn at this objective")]
 	protected int m_ObjMaxVeh;
 	
@@ -41,15 +44,19 @@ class LIB_ObjectiveComponent : ScriptComponent
 	protected int m_ObjCapCurTime = 0;
 	protected int m_ObjCapStartTime = 0;
 	
+	// IEntity will be the radio tower obj, array<IEntity> will be the objectives within the radius of the radio tower obj
+	protected ref map<IEntity, array<IEntity>> m_RadioTowerObjectives = new map<IEntity, array<IEntity>>;
+	
 	protected ref array<ref EntityID> m_Houses = {};
 	protected ref array<IEntity> m_Units = {};
 	protected ref array<IEntity> m_PopulatedBuildings = {};
+	// Should be [ImgWidget, TextWidget]
+	protected ref array<Widget> m_MarkerWidgets = {};
+	
+	// Managers
 	protected LIB_AiManagerClass m_AiManager;
 	protected LIB_TownManagerComponent m_ObjManager;
 	static ref LIB_MapObjLeftoverUnitsUI m_UnitMapManager;
-	
-	// Should be [ImgWidget, TextWidget]
-	protected ref array<Widget> m_MarkerWidgets = {};
 	
 	protected IEntity m_ObjectiveEnt;
 	protected ref TRA_GlobalConfig m_Config;
@@ -300,6 +307,8 @@ class LIB_ObjectiveComponent : ScriptComponent
 	protected override void EOnFrame(IEntity owner, float timeSlice)
 	{
 		bool capturing = IsCapturing();
+		
+		// Capturing logic, very simple
 		if (m_ObjFaction == "USSR" && capturing && m_BluforTotal > 0)
 		{
 			m_ObjCapCurTime = System.GetTickCount();
@@ -318,6 +327,8 @@ class LIB_ObjectiveComponent : ScriptComponent
 				Capture();
 			}
 		}
+		
+		// if capturing in progress, request reinforcements if within range of a radio tower and aggression high enough (need to implement aggression as well)
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -349,6 +360,9 @@ class LIB_ObjectiveComponent : ScriptComponent
 				m_ObjManager.AddHostileObjArray(m_ObjectiveEnt);
 				break;
 		}
+		
+		// If obj type is radio tower then:
+		// Add all objectives within tower radius (to be added to config, probably 2km range) to map<>
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -435,11 +449,54 @@ class LIB_ObjectiveComponent : ScriptComponent
 	
 	protected void InitTown(IEntity obj)
 	{
+		
+	}
+	
+	protected void InitFactory()
+	{
+		// Spawn Defending Units
+		
+		// Create some kind of action to start supply generation once captured - Not sure how I want to handle this yet
+	}
+	
+	protected void InitCapital()
+	{
+		// Spawn Defending units
+		
+		// Spawn any Defending structures
+	}
+	
+	protected void InitMilitary()
+	{
+		// Spawn defending units
+		
+		// Spawn any defending structures
+	}
+	
+	protected void InitRadioTower()
+	{
+		// Spawn defending units
+	}
+	
+	void DeactivateObj()
+	{
+		foreach (IEntity unit : m_Units)
+		{
+			//Print(unit);
+			SCR_EntityHelper.DeleteEntityAndChildren(unit);	
+		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void SpawnDefenders()
+	{
 		int AiCount = 0;
 		int VehCount = 0;
 		int VehCountMax = Math.RandomInt(1, m_ObjMaxVeh);
+		int AiPatrolCount = m_ObjAiCount - m_ObjAiInside;
 		
-		for (int i; AiCount <= (m_ObjAiCount - (VehCountMax * 4)); i++)
+		// House Ai
+		for (int i; AiCount <= (m_ObjAiInside - (VehCountMax * 4)); i++)
 		{
 			IEntity spawnBuilding = GetRandomHouse();
 			if (m_PopulatedBuildings.Find(spawnBuilding) > -1)
@@ -447,15 +504,17 @@ class LIB_ObjectiveComponent : ScriptComponent
 				continue;
 			}
 			
+			RandomGenerator randomGenerator = new RandomGenerator();
 			vector spawnPosition = spawnBuilding.GetOrigin();
+			vector waypointPosition = randomGenerator.GenerateRandomPointInRadius(5, 30, spawnPosition);
+			
 			m_PopulatedBuildings.Insert(spawnBuilding);
 			
-			string waypointType = "{93291E72AC23930F}Prefabs/AI/Waypoints/AIWaypoint_Defend.et";
 			SCR_AIGroup group;
 			ResourceName groupToSpawn = m_Config.m_OInfGroups.GetRandomElement();
 			
 			
-			m_AiManager.AiSpawner(groupToSpawn, spawnPosition, spawnPosition, group, this, waypointType);
+			m_AiManager.AiSpawner(groupToSpawn, spawnPosition, waypointPosition, group, this, m_Config.m_WaypointDefend);
 			
 			AiCount += group.GetNumberOfMembersToSpawn();
 		}
@@ -466,40 +525,12 @@ class LIB_ObjectiveComponent : ScriptComponent
 			IEntity spawnBuilding = GetRandomHouse();
 			vector spawnPosition = spawnBuilding.GetOrigin();
 			
+			// Still need to handle spawning the fire team
 			m_AiManager.SpawnMannedVeh(m_Config.m_OVehGroups.GetRandomElement(), m_Config.m_OLightFireTeam, spawnPosition, null, this);
 			
 			// hard coded for now, m_OLightFireTeam has 4 units.
 			m_BluforTotal += 4;
 			VehCount++;
-		}
-	}
-	
-	protected void InitFactory()
-	{
-	
-	}
-	
-	protected void InitCapital()
-	{
-	
-	}
-	
-	protected void InitMilitary()
-	{
-	
-	}
-	
-	protected void InitRadioTower()
-	{
-	
-	}
-	
-	void DeactivateObj()
-	{
-		foreach (IEntity unit : m_Units)
-		{
-			//Print(unit);
-			SCR_EntityHelper.DeleteEntityAndChildren(unit);	
 		}
 	}
 	

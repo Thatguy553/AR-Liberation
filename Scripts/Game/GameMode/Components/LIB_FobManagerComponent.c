@@ -66,10 +66,17 @@ class LIB_FobManagerComponent : ScriptComponent
 		Replication.BumpMe();
 	}
 	
-	void removeWIPStructureRplId(FactionKey factionkey, RplId rplid)
+	//------------------------------------------------------------------------------------------------
+	void RemoveWIPStructureRplId(FactionKey factionkey, RplId rplid)
 	{
 		WIPFobRplIds.RemoveItem(rplid);
 
 		Replication.BumpMe();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void CreateFob(IEntity ent)
+	{
+	
 	}
 }

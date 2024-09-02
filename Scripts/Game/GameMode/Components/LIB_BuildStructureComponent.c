@@ -25,6 +25,8 @@ class LIB_BuildStructureComponent : ScriptComponent
 	protected ResourceName m_material = "{58F07022C12D0CF5}Assets/Editor/PlacingPreview/Preview.emat";
 	protected ResourceName m_materialRed = "{F34CA01A59FDBED4}Assets/Editor/PlacingPreview/PreviewRed.emat";
 	
+	protected bool m_isFOB = false;
+	
 	protected bool m_blocked = false;
 	protected float m_radius;
 	protected float m_maxDifference;
@@ -48,61 +50,53 @@ class LIB_BuildStructureComponent : ScriptComponent
 	//------------------------------------------------------------------------------------------------
 	void StructMoveDown()
 	{
-		Print("StructMoveDown");
 		m_fMatY -= 1;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	void StructMoveUp()
 	{
-		Print("StructMoveUp");
 		m_fMatY += 1;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	void StructMoveLeft()
 	{
-		Print("StructMoveLeft");
 		m_fMatZ += 1;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	void StructMoveRight()
 	{
-		Print("StructMoveRight");
 		m_fMatZ -= 1;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	void StructMoveForward()
 	{
-		Print("StructMoveForward");
 		m_fMatX -= 1;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	void StructMoveBackward()
 	{
-		Print("StructMoveBackward");
 		m_fMatX += 1;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	void StructRotateLeft()
 	{
-		Print("StructRotateLeft");
 		m_fMatR += 1;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	void StructRotateRight()
 	{
-		Print("StructRotateRight");
 		m_fMatR -= 1;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void createStructurePreview(ResourceName resName, float distance, int placement, bool startPlacing)
+	void createStructurePreview(ResourceName resName, float distance, int placement, bool startPlacing, bool isFOB = false)
 	{
 		// Start listening for input
 		InpMngr.AddActionListener("LibBuildingQ", EActionTrigger.PRESSED, StructMoveDown);
@@ -122,7 +116,8 @@ class LIB_BuildStructureComponent : ScriptComponent
 
 		// Create UI
 		OpenBuildControlUI("BuildControls", "{0DF839AA29EE4320}UI/layouts/BuildingUI/BuildingHUD.layout");
-						
+		
+		m_isFOB = isFOB;
 		m_resName = resName;
 		m_dist = distance;
 		m_placement = placement;
@@ -186,19 +181,13 @@ class LIB_BuildStructureComponent : ScriptComponent
 		m_player.GetTransform(mat);
 		
 		dir = m_player.GetWorldTransformAxis(2);
-		Print("player dir");
-		Print(dir);
 		
 		vector angles = Math3D.MatrixToAngles(mat);
 		angles[0] = (angles[0] + m_placement) + m_fMatR;
 		Math3D.AnglesToMatrix(angles, mat);
 		
-		Print("angles");
-		Print(angles);
-		
 		mat[3] = mat[3] + (dir * m_dist);
 		
-		//mat[3][1] = GetGame().GetWorld().GetSurfaceY(mat[3][0], mat[3][2]);
 		mat[3][1] = mat[3][1] + m_fMatY;
 		mat[3][0] = mat[3][0] + m_fMatZ;
 		mat[3][2] = mat[3][2] + m_fMatX;
@@ -244,7 +233,8 @@ class LIB_BuildStructureComponent : ScriptComponent
 		
 		LIB_NetworkComponent netComp = LIB_NetworkComponent.Cast(m_PlayerController.FindComponent(LIB_NetworkComponent));
 		
-		netComp.buildStructureServer(m_resName, finalMat);
+		// Should make buildStructureServer return a bool depending on success or not.
+		netComp.buildStructureServer(m_resName, finalMat, m_isFOB);
 	}
 
 	//------------------------------------------------------------------------------------------------

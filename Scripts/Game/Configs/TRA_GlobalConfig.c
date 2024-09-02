@@ -79,6 +79,12 @@ class TRA_GlobalConfig
 	[Attribute(defvalue: "5", desc: "Distance from the player the preview/obj will be.", category: "Fob Data")]
 	float m_BPreviewDist;
 	
+	[Attribute(desc: "Build list item data", category: "Fob Data")]
+	ref array<ref LIB_BuildItemData> m_BFobBuildList;
+	
+	[Attribute(desc: "Ordered List of FOB names", category: "Fob Data")]
+	ref array<string> m_BFobNameList;
+	
 	//------------------------------------------------------------------------------------------------
 	static ref TRA_GlobalConfig m_Config;
 	

@@ -4,7 +4,7 @@ class LIB_BuildStructureWIP
 	protected LIB_FobManagerComponent m_FobComp;
 
 	//------------------------------------------------------------------------------------------------
-	void build(ResourceName resourcename, vector mat[4])
+	void build(ResourceName resourcename, vector mat[4], bool isFOB)
 	{
 		EntitySpawnParams params = new EntitySpawnParams();
 		params.TransformMode = ETransformMode.WORLD;
@@ -12,23 +12,10 @@ class LIB_BuildStructureWIP
 		
 		IEntity wipStructure = null;
 		Resource resource;
-		//SCR_CTI_FactoryData factoryData;
 		int index = -1;
 
-		//int basecount = m_FobComp.GetFobCount();
-		//index = m_gameMode.FactoriesUS.findIndexFromResourcename(resourcename);
-		//factoryData = m_gameMode.FactoriesUS.g_US_Factories[index];
-		//resource = Resource.Load(factoryData.getWIPName());
 		
 		resource = Resource.Load(resourcename);
-
-		// Step 1: If no base yet
-		/*if (basecount < 1)
-		{
-			m_FobComp.addBase(factionkey, mat[3], basecount);
-			wipStructure = GetGame().SpawnEntityPrefab(resource, GetGame().GetWorld(), params);
-			wipStructure.Update();
-		}*/
 
 		// Step 2: If pos inside base area (base area unions not handled, add structure to first possible base)
 		bool inside = false;
@@ -47,23 +34,22 @@ class LIB_BuildStructureWIP
 			}
 		}*/
 
-		// Step 4: Not first and not inside other area so make new base
-		//m_FobComp.addBase(factionkey, mat[3], basecount);
 		wipStructure = GetGame().SpawnEntityPrefab(resource, GetGame().GetWorld(), params);
 		wipStructure.Update();
 
 
 		if (wipStructure)
 		{
-			// Set faction of building
-			//FactionAffiliationComponent faffcomp = FactionAffiliationComponent.Cast(wipStructure.FindComponent(FactionAffiliationComponent));
-			//faffcomp.SetAffiliatedFactionByKey(factionkey);
 
 			// Store wip structure IDs for searching
 			RplComponent rplComp = RplComponent.Cast(wipStructure.FindComponent(RplComponent));
 			RplId rplid = rplComp.Id();
-			m_FobComp.AddFobRplId(rplid);
+			
+			if (isFOB)
+				m_FobComp.AddFobRplId(rplid);
 
+			
+			
 			// Pay the cost
 			//int cost = factoryData.getPrice();
 			//m_gameMode.changeCommanderFunds(factionkey, -cost);

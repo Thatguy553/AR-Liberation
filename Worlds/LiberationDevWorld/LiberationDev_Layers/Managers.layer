@@ -50,6 +50,8 @@ RadioManagerEntity RadioManager : "{B8E09FAB91C4ECCD}Prefabs/Radio/RadioManager.
 }
 SCR_BaseGameMode GameModeSF : "{ECEEDB2D3737204B}Prefabs/ScenarioFramework/GameModeSF.et" {
  components {
+  LIB_FobManagerComponent "{6238EAED562154B0}" {
+  }
   LIB_TownManagerComponent "{61C8EE3795399829}" {
   }
   SCR_DataCollectorComponent "{5ADE83EE64329989}" {

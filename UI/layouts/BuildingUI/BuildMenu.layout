@@ -1,0 +1,462 @@
+FrameWidgetClass {
+ Name "BuildMenuRoot"
+ {
+  GridLayoutWidgetClass "{6238EAEE5B50E06B}" {
+   Name "GridLayout0"
+   Slot FrameWidgetSlot "{6238EAEE5B50E046}" {
+    PositionX 700
+    OffsetLeft 700
+    PositionY 275
+    OffsetTop 275
+    SizeX 600
+    OffsetRight -1300
+    SizeY 560
+    OffsetBottom -835
+   }
+   RowFill {
+    1.9 1.5 1.4 7 2 2
+   }
+   ColumnFill {
+    2 2
+   }
+   {
+    FrameWidgetClass "{6238EAE91723E8D9}" {
+     Name "title_frame"
+     Slot GridWidgetSlot "{6238EAE91723E8A4}" {
+      ColumnSpan 2
+     }
+     "Z Order" 2
+     {
+      RichTextWidgetClass "{6238EAE969D99494}" {
+       Name "menu_title"
+       Slot FrameWidgetSlot "{6238EAE969D99478}" {
+        PositionX 223.171
+        OffsetLeft 223.171
+        PositionY 16.572
+        OffsetTop 16.572
+        SizeX 138.668
+        OffsetRight -361.839
+        SizeY 36.629
+        OffsetBottom -53.201
+       }
+       "Z Order" 2
+       Text "Build Menu"
+       "Font Size" 28
+       "Horizontal Alignment" Center
+       "Vertical Alignment" Center
+      }
+      ButtonWidgetClass "{6238EAE96D0BA2E2}" {
+       Name "menu_close_button"
+       Slot FrameWidgetSlot "{6238EAE96D0BA2C2}" {
+        PositionX 560.395
+        OffsetLeft 560.395
+        PositionY 11.308
+        OffsetTop 11.308
+        SizeX 30
+        OffsetRight -590.395
+        SizeY 30
+        OffsetBottom -41.308
+       }
+       "Z Order" 2
+       Color 0.138 0.138 0.138 1
+       {
+        TextWidgetClass "{6238EAE95BDD6EF1}" {
+         Name "Text0"
+         Slot ButtonWidgetSlot "{6238EAE95BDD6EDE}" {
+         }
+         Text "X"
+         "Font Size" 22
+         "Min Font Size" 22
+        }
+       }
+      }
+      ImageWidgetClass "{6238EAE8F3A7C56E}" {
+       Name "title_background"
+       Slot FrameWidgetSlot "{6238EAE8F3A7C530}" {
+        PositionX 6.543
+        OffsetLeft 6.543
+        PositionY 5.396
+        OffsetTop 5.396
+        SizeX 589.551
+        OffsetRight -596.094
+        SizeY 56.729
+        OffsetBottom -62.125
+       }
+       Color 0.305 0.305 0.305 0.731
+      }
+     }
+    }
+    ImageWidgetClass "{6238EAE9E93A3C4F}" {
+     Name "Background"
+     Slot GridWidgetSlot "{6238EAE9E93A3C0B}" {
+      RowSpan 6
+      ColumnSpan 2
+     }
+     Texture "{6F77DF4674C4C580}Images/US_Woodland_pattern.edds"
+     Size 640 640
+    }
+    TextListboxWidgetClass "{62392D4443347F2A}" {
+     Name "category_prices"
+     Slot GridWidgetSlot "{62392D4443347F09}" {
+      Row 3
+      Column 1
+     }
+    }
+    TextListboxWidgetClass "{62392D4423CDFCF9}" {
+     Name "category_items"
+     Slot GridWidgetSlot "{62392D4423CDFCC8}" {
+      Row 3
+      Column 0
+     }
+     "highlight row" 1
+     FontProperties FontProperties "{623A19864A6D3A2C}" {
+      Font "{DB11BB5C9C6F6A43}UI/Fonts/Default/default16.fnt"
+     }
+    }
+    FrameWidgetClass "{6238EAE819E91B72}" {
+     Name "category_frame"
+     Slot GridWidgetSlot "{6238EAE819E91B54}" {
+      Row 1
+      Column 0
+      ColumnSpan 2
+     }
+     "Z Order" 5
+     {
+      GridLayoutWidgetClass "{62392D5403B379FD}" {
+       Name "GridLayout0"
+       Slot FrameWidgetSlot "{62392D5403B379D9}" {
+        PositionX 88.512
+        OffsetLeft 88.512
+        PositionY 0
+        OffsetTop 0
+        SizeX 386.958
+        OffsetRight -475.47
+        SizeY 44.845
+        OffsetBottom -44.845
+       }
+       ColumnFill {
+        1 1 1 1 1 1 1
+       }
+       {
+        ButtonWidgetClass "{62392D548239C26A}" {
+         Name "category_logistic"
+         Slot GridWidgetSlot "{62392D4B35D39141}" {
+          HorizontalAlign 1
+          VerticalAlign 1
+          Row 0
+          Column 6
+         }
+         Color 0.205 0.205 0.205 1
+         {
+          ImageWidgetClass "{62392D548239C269}" {
+           Name "Image0"
+           Slot ButtonWidgetSlot "{62392D5524F7205F}" {
+           }
+           Texture "{F7E8D4834A3AFF2F}UI/Imagesets/Conflict/conflict-icons-bw.imageset"
+           Image "Slot_Light_HQ_HUD"
+           Size 40 40
+          }
+         }
+        }
+        ButtonWidgetClass "{62392D548288C82C}" {
+         Name "category_props"
+         Slot GridWidgetSlot "{62392D4B35D39108}" {
+          HorizontalAlign 1
+          VerticalAlign 1
+          Row 0
+          Column 5
+         }
+         Color 0.205 0.205 0.205 1
+         {
+          ImageWidgetClass "{62392D548288C813}" {
+           Name "Image0"
+           Slot ButtonWidgetSlot "{62392D5524F7205F}" {
+           }
+           Texture "{F7E8D4834A3AFF2F}UI/Imagesets/Conflict/conflict-icons-bw.imageset"
+           Image "Supplies_HUD"
+           Size 40 40
+          }
+         }
+        }
+        ButtonWidgetClass "{62392D54834DBA18}" {
+         Name "category_arty"
+         Slot GridWidgetSlot "{62392D4B35D390DC}" {
+          HorizontalAlign 1
+          VerticalAlign 1
+          Row 0
+          Column 4
+         }
+         Color 0.205 0.205 0.205 1
+         {
+          ImageWidgetClass "{62392D54834DBA1F}" {
+           Name "Image0"
+           Slot ButtonWidgetSlot "{62392D5524F7205F}" {
+           }
+           Texture "{2B4F198AB5937F32}UI/Imagesets/Editor/Icons/EditableEntities.imageset"
+           Image "Barrage"
+           Size 40 40
+          }
+         }
+        }
+        ButtonWidgetClass "{62392D548073FB40}" {
+         Name "category_air"
+         Slot GridWidgetSlot "{62392D4B35D3909B}" {
+          HorizontalAlign 1
+          VerticalAlign 1
+          Row 0
+          Column 3
+         }
+         Color 0.205 0.205 0.205 1
+         {
+          ImageWidgetClass "{62392D548073FB46}" {
+           Name "Image0"
+           Slot ButtonWidgetSlot "{62392D5524F7205F}" {
+           }
+           Texture "{F7E8D4834A3AFF2F}UI/Imagesets/Conflict/conflict-icons-bw.imageset"
+           Image "Helipad_HUD"
+           Size 40 40
+          }
+         }
+        }
+        ButtonWidgetClass "{62392D5480A9E216}" {
+         Name "category_armor"
+         Slot GridWidgetSlot "{62392D4B35D39042}" {
+          HorizontalAlign 1
+          VerticalAlign 1
+          Row 0
+          Column 2
+         }
+         Color 0.205 0.205 0.205 1
+         {
+          ImageWidgetClass "{62392D5480A9E214}" {
+           Name "Image0"
+           Slot ButtonWidgetSlot "{62392D5524F7205F}" {
+           }
+           Texture "{2B4F198AB5937F32}UI/Imagesets/Editor/Icons/EditableEntities.imageset"
+           Image "EditableEntity_Vehicle_Apc"
+           Size 40 40
+          }
+         }
+        }
+        ButtonWidgetClass "{62392D5481C59CF2}" {
+         Name "category_vehicle"
+         Slot GridWidgetSlot "{62392D4B35D39019}" {
+          HorizontalAlign 1
+          VerticalAlign 1
+          Row 0
+          Column 1
+         }
+         Color 0.205 0.205 0.205 1
+         {
+          ImageWidgetClass "{62392D5481C59CF1}" {
+           Name "Image0"
+           Slot ButtonWidgetSlot "{62392D5524F7205F}" {
+           }
+           Texture "{F7E8D4834A3AFF2F}UI/Imagesets/Conflict/conflict-icons-bw.imageset"
+           Image "LightVehicleDepot_HUD"
+           Size 40 40
+          }
+         }
+        }
+        ButtonWidgetClass "{62392D55CEB85AB9}" {
+         Name "category_infantry"
+         Slot GridWidgetSlot "{62392D4B35D38FED}" {
+          HorizontalAlign 1
+          VerticalAlign 1
+          Row 0
+          Column 0
+         }
+         Color 0.205 0.205 0.205 1
+         {
+          ImageWidgetClass "{62392D5524F72072}" {
+           Name "Image0"
+           Slot ButtonWidgetSlot "{62392D5524F7205F}" {
+            VerticalAlign 2
+           }
+           Texture "{2B4F198AB5937F32}UI/Imagesets/Editor/Icons/EditableEntities.imageset"
+           Image "EditableEntity_Character_Dead"
+           Size 40 40
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+    FrameWidgetClass "{62392D59B0555F83}" {
+     Name "boxlist_label_frame"
+     Slot GridWidgetSlot "{62392D59B0555F6A}" {
+      Row 2
+      Column 0
+      ColumnSpan 2
+     }
+     "Z Order" 4
+     {
+      ImageWidgetClass "{62392D586E645678}" {
+       Name "Image2"
+       Slot FrameWidgetSlot "{62392D586E64565F}" {
+        PositionX 471.2
+        OffsetLeft 471.2
+        PositionY 9
+        OffsetTop 9
+        SizeX 30
+        OffsetRight -501.2
+        SizeY 28.938
+        OffsetBottom -37.938
+       }
+       Color 0.107 0.925 0 1
+       Texture "{F7E8D4834A3AFF2F}UI/Imagesets/Conflict/conflict-icons-bw.imageset"
+       Image "Building_Supplies"
+       Size 128 128
+      }
+      ImageWidgetClass "{62392D586FA09749}" {
+       Name "Image1"
+       Slot FrameWidgetSlot "{62392D586FA09717}" {
+        PositionX 514.208
+        OffsetLeft 514.2
+        PositionY 9
+        OffsetTop 9
+        SizeX 30
+        OffsetRight -544.2
+        SizeY 30
+        OffsetBottom -39
+       }
+       Color 0.75 0.001 0.001 1
+       Texture "{CDA6C73DFD789999}UI/Imagesets/WeaponInfo/WeaponInfo.imageset"
+       Image "firemode-rifle-burst2"
+       Size 24 32
+      }
+      ImageWidgetClass "{62392D586C88FE33}" {
+       Name "Image0"
+       Slot FrameWidgetSlot "{62392D586C88FE2D}" {
+        PositionX 556.431
+        OffsetLeft 556.4
+        PositionY 9
+        OffsetTop 9
+        SizeX 30
+        OffsetRight -586.4
+        SizeY 30
+        OffsetBottom -39
+       }
+       Color 0.769 0.597 0.017 1
+       Texture "{F7E8D4834A3AFF2F}UI/Imagesets/Conflict/conflict-icons-bw.imageset"
+       Image "Building_Fuel"
+       Size 128 128
+      }
+      RichTextWidgetClass "{62392D5862CBE740}" {
+       Name "RichText0"
+       Slot FrameWidgetSlot "{62392D5862CBE717}" {
+        PositionX 5.168
+        OffsetLeft 5.168
+        PositionY 6.891
+        OffsetTop 6.891
+        SizeX 180.103
+        OffsetRight -185.271
+        SizeY 35.168
+        OffsetBottom -42.058
+       }
+       Text "Category"
+       "Font Size" 28
+       "Horizontal Alignment" Center
+       "Vertical Alignment" Center
+      }
+     }
+    }
+    FrameWidgetClass "{62392D47AA070811}" {
+     Name "available_resources_frame"
+     Slot GridWidgetSlot "{62392D47AA0707E1}" {
+      Row 4
+      Column 0
+      RowSpan 2
+     }
+     "Z Order" 4
+     {
+      RichTextWidgetClass "{62392D47F4DF4B40}" {
+       Name "text_supplies"
+       Slot FrameWidgetSlot "{62392D47F4DF4B3D}" {
+        PositionX 5.819
+        OffsetLeft 5.819
+        PositionY 0
+        OffsetTop 0
+        SizeX 283.437
+        OffsetRight -289.256
+        SizeY 30
+        OffsetBottom -30
+       }
+       Color 0.107 0.925 0 1
+       Text "Supplies: 0"
+      }
+      RichTextWidgetClass "{62392D47EA02F7C8}" {
+       Name "text_ammo"
+       Slot FrameWidgetSlot "{62392D47EA02F7AD}" {
+        PositionX 5.463
+        OffsetLeft 5.463
+        PositionY 32.481
+        OffsetTop 32.481
+        SizeX 284.035
+        OffsetRight -289.498
+        SizeY 30
+        OffsetBottom -62.481
+       }
+       Color 0.75 0.001 0.001 1
+       Text "Ammunition: 0"
+      }
+      RichTextWidgetClass "{62392D47989BC3C2}" {
+       Name "text_fuel"
+       Slot FrameWidgetSlot "{62392D47989BC3A3}" {
+        PositionX 5.312
+        OffsetLeft 5.312
+        PositionY 65.146
+        OffsetTop 65.146
+        SizeX 284.502
+        OffsetRight -289.814
+        SizeY 30.001
+        OffsetBottom -95.147
+       }
+       Color 0.769 0.597 0.017 1
+       Text "Fuel: 0"
+      }
+      RichTextWidgetClass "{62392D470F089AD7}" {
+       Name "text_units"
+       Slot FrameWidgetSlot "{62392D47989BC3A3}" {
+        PositionX 5.312
+        OffsetLeft 5.312
+        PositionY 100.753
+        OffsetTop 100.753
+        SizeX 284.502
+        OffsetRight -289.814
+        SizeY 30.001
+        OffsetBottom -130.754
+       }
+       Text "Units: 0/0"
+      }
+     }
+    }
+    ButtonWidgetClass "{62392D476B8F99B0}" {
+     Name "button_build"
+     Slot GridWidgetSlot "{62392D476B8F9980}" {
+      Row 5
+      Column 1
+     }
+     "Z Order" 5
+     Color 0.305 0.305 0.305 0.731
+     components {
+      SCR_ModularButtonComponent "{623A19853F84C58D}" {
+       m_eEventReturnValue 2147483585
+       m_bFocusOnMouseEnter 1
+      }
+     }
+     {
+      RichTextWidgetClass "{62392D474F0E0672}" {
+       Name "button_build_text"
+       Slot ButtonWidgetSlot "{62392D474F0E0655}" {
+       }
+       Text "Build"
+       "Font Size" 32
+      }
+     }
+    }
+   }
+  }
+ }
+}

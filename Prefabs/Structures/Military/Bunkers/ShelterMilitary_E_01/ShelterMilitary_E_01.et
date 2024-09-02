@@ -5,4 +5,40 @@ SCR_DestructibleBuildingEntity : "{26A4193702B0EC4A}Prefabs/Structures/Military/
    Enabled 1
   }
  }
+ {
+  GenericEntity : "{3961C0D2EEC93C43}Prefabs/Structures/Signs/Military/Supplies/Sign_SupplyStorage_Wall_01_Base.et" {
+   ID "6238EAEFB92E8A0F"
+   components {
+    ActionsManagerComponent "{5E3298BE3694CAAB}" {
+     ActionContexts {
+      UserActionContext "{6238EAEFF91898C1}" {
+       UIInfo SCR_ActionContextUIInfo "{6238EAEFCCD0205B}" {
+        Name "Open FOB Build Menu"
+        Description "Open FOB Build Menu Description"
+       }
+       ContextName "fob_build_menu"
+       Position PointInfo "{6238EAEF204A6151}" {
+        Offset 0 0 0.5862
+       }
+       Radius 1
+      }
+     }
+     additionalActions {
+      LIB_BuildFromFobUserAction "{6238EAEEA553F9BA}" {
+       ParentContextList {
+        "fob_build_menu"
+       }
+       UIInfo SCR_ActionUIInfo "{6238EAEEB799A363}" {
+        Name "Open Build Menu"
+        Description "Open Build Menu Description"
+       }
+       ActionTitle "Open Build Menu Title"
+      }
+     }
+    }
+   }
+   coords 3.601 1.615 1.681
+   angleY -179.739
+  }
+ }
 }
